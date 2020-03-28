@@ -1,13 +1,15 @@
 export interface Profile {
   name: string,
-  email: string,
+  contact: string,
   description: string
+  tags: ReadonlyArray<any>
+  avatar: string
 }
 
 export interface State {
   profiles: ReadonlyArray<Profile>
   scan: boolean,
-  askProfile: boolean
+  editProfile: boolean
   profile?: Profile
 }
 
@@ -16,12 +18,23 @@ export interface Action {
   payload: any
 }
 
-const currentProfile = (state: State = { profiles: [], scan: false, askProfile: false }, action: Action) => {
+const currentProfile = (state: State = {
+  profiles: [],
+  scan: false,
+  editProfile: false
+}, action: Action) => {
+
   switch (action.type) {
-    case "ASK_PROFILE":
+    case "EDIT_PROFILE":
       return {
         ...state,
-        askProfile: true,
+        editProfile: true,
+      }
+    case "CANCEL_EDIT_PROFILE":
+      console.log('q')
+      return {
+        ...state,
+        editProfile: false,
       }
     default:
       return state

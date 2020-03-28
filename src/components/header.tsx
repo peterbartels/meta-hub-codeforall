@@ -7,7 +7,7 @@ import {
   Centered,
   NameContainer,
   Name,
-  TyperContainer,
+  MenuContainer,
   HeaderContainer,
   Header,
   MenuItem,
@@ -16,7 +16,7 @@ import {
 
 const HeaderComponent: FunctionComponent = () => {
 
-  const typerWords = ["Hacking Corona", "Add your profile to share with others"]
+  const typerWords = ["Hacking Corona", "An initiative by Dtuch Hack Health"]
   const currentTyperWord = useTypewriter({
     words: typerWords,
     eraseSpeed: 50,
@@ -26,7 +26,7 @@ const HeaderComponent: FunctionComponent = () => {
   const dispatch = useDispatch()
 
   const dispatchStartAddProfile = useCallback(
-    () => (dispatch({ type: "ASK_PROFILE", payload: true })),
+    () => (dispatch({ type: "EDIT_PROFILE", payload: true })),
     [dispatch]
   );
 
@@ -36,22 +36,24 @@ const HeaderComponent: FunctionComponent = () => {
         <Name>
           Hacking Corona
         </Name>
-        <TyperContainer>
-          <div>{currentTyperWord}<span className="cursor">|</span></div>
-        </TyperContainer>
+
+        <MenuContainer>
+          <MenuItem onClick={dispatchStartAddProfile}>
+            <FontAwesomeIcon icon="home" size="2x" />
+            <span>Home</span>
+          </MenuItem>
+          <MenuItem onClick={dispatchStartAddProfile}>
+            <FontAwesomeIcon icon="user" size="2x" />
+            <span>Profile</span>
+          </MenuItem>
+          <MenuItem onClick={dispatchStartAddProfile}>
+            <FontAwesomeIcon icon="search" size="2x" />
+            <span>Search</span>
+          </MenuItem>
+
+        </MenuContainer>
       </Centered>
     </NameContainer>
-    <HeaderContainer>
-      <Header>
-        <MenuItem onClick={dispatchStartAddProfile}>
-          <FontAwesomeIcon icon="plus" size="2x" />&nbsp;&nbsp;Add Profile
-        </MenuItem>
-        <Icons>
-          <a href="https://www.linkedin.com/in/peterbartels/"><FontAwesomeIcon icon={["fab", "linkedin"]} style={{ color: "#FFFFFF" }} size="2x" /></a>
-          <a href="https://github.com/peterbartels/"><FontAwesomeIcon icon={["fab", "github"]} style={{ color: "#FFFFFF" }} size="2x" /></a>
-        </Icons>
-      </Header>
-    </HeaderContainer>
   </>)
 }
 

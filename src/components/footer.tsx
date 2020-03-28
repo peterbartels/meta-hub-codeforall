@@ -10,7 +10,7 @@ const FooterComponent: FunctionComponent = () => {
   return (
     <FooterContainer>
       <Footer>
-        Footer for extra information
+        Privacy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Participants&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors
       </Footer>
     </FooterContainer >
   )

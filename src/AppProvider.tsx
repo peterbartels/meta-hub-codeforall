@@ -3,7 +3,7 @@ import './App.css';
 import { ThemeProvider } from '@xstyled/styled-components'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faPlus, faUser, faSearch, faHome } from '@fortawesome/free-solid-svg-icons'
 //TODO: add Fontawesome icons: import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Provider as ReduxProvider } from 'react-redux'
 import { createStore } from 'redux'
@@ -11,7 +11,7 @@ import App from './App';
 import rootReducer from './reducers'
 
 const store = createStore(rootReducer as any)
-library.add(fab, faCheckSquare, faPlus)
+library.add(fab, faCheckSquare, faPlus, faUser, faSearch, faHome)
 
 
 const theme = {

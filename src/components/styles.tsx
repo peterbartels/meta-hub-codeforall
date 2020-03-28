@@ -15,7 +15,7 @@ export const HeaderContainer = styled.div`
 
 export const NameContainer = styled.div`
   ${columnFlexCss}
-  background: #21252A;
+  background: #414756;
 `
 
 export const Name = styled.div`
@@ -25,32 +25,36 @@ export const Name = styled.div`
   padding: 30px 0px 30px 15px;  
 `
 
-export const TyperContainer = styled.div`
+export const MenuContainer = styled.div`
   color: #fff;
   display:flex;
   flex:1;
   justify-content: flex-end;
+  margin-top:10px;
   div {
-    width: 400px;
-    padding: 5px;
-    font-family: 'Sen';
-    font-weight: bold;
+  font-family: 'Sen';
+  font-weight: bold;
   }
 `
 
 export const MenuItem = styled.div`
   color: white;
   font-family: 'Sen';
-  color: white;
   text-transform: uppercase;
   font-size: 0.9rem;
   font-weight: bold;
-  margin-right: 2rem;
   display: flex;
   align-items: center;
   cursor:pointer;
+  border:solid 1px white;
+  padding: 10px;
+  margin:5px;
   &:hover {
-    opacity: 0.7;
+  opacity: 0.7;
+  }
+  flex-direction:column;
+  span {
+  margin-top: 5px;
   }
 `
 
@@ -104,12 +108,12 @@ export const FooterContainer = styled(MainContainer)`
 export const Footer = styled(Centered)`
   background: #414756;
   color:white;
-  height: 150px;
-  padding: 50px;
+  height: 40px;
+  padding: 40px;
   font-family: 'Sen';
 `
 
-export const ScannerContainer = styled.div`
+export const EditProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -133,6 +137,7 @@ export const NumberInput = styled.input.attrs({
 
 //TODO: configure gutter instead of padding
 export const SmallHeader = styled.div`
-padding: 0.2rem;
-font-family: 'Nunito';
+  padding: 0.2rem;
+  font-family: 'Nunito';
+  font-size: 2rem;
 `
