@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const columnFlexCss = `
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;  
 `
 
@@ -15,22 +15,26 @@ export const HeaderContainer = styled.div`
 
 export const NameContainer = styled.div`
   ${columnFlexCss}
-  background: #414756;
 `
 
 export const Name = styled.div`
-  color: #FFFFFF;
+  color: #A9A9A9;
+  margin-left:200px;
   font-family: 'Nunito';
-  font-size: 2rem;;
+  font-size: 1rem;;
   padding: 30px 0px 30px 15px;  
+  ${columnFlexCss} 
+  span {
+  padding: 20px;
+  }
 `
 
 export const MenuContainer = styled.div`
-  color: #fff;
   display:flex;
+  
   flex:1;
-  justify-content: flex-end;
   margin-top:10px;
+  margin-left:250px;
   div {
   font-family: 'Sen';
   font-weight: bold;
@@ -38,15 +42,14 @@ export const MenuContainer = styled.div`
 `
 
 export const MenuItem = styled.div`
-  color: white;
+  color: #A9A9A9;
   font-family: 'Sen';
   text-transform: uppercase;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   cursor:pointer;
-  border:solid 1px white;
   padding: 10px;
   margin:5px;
   &:hover {
@@ -92,6 +95,9 @@ export const MainContainer = styled.div`
 export const ContentContainer = styled(MainContainer)`
   flex: 1;
   padding: 0px 10px 0px 10px;
+  -webkit-box-shadow: 1px -7px 17px -11px rgba(0,0,0,0.58);
+  -moz-box-shadow: 1px -7px 17px -11px rgba(0,0,0,0.58);
+  box-shadow: 1px -7px 17px -11px rgba(0,0,0,0.58);
 `
 
 export const Content = styled(Centered)`

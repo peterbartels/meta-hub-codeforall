@@ -1,8 +1,10 @@
 export interface Profile {
+  alias: string,
   name: string,
   contact: string,
+  email: string,
   description: string
-  tags: ReadonlyArray<any>
+  skills: any
   avatar: string
 }
 
@@ -30,11 +32,16 @@ const currentProfile = (state: State = {
         ...state,
         editProfile: true,
       }
-    case "CANCEL_EDIT_PROFILE":
-      console.log('q')
+    case "UPDATE_PROFILE":
       return {
         ...state,
         editProfile: false,
+        profiles: [...state.profiles, action.payload]
+      }
+    case "CANCEL_EDIT_PROFILE":
+      return {
+        ...state,
+
       }
     default:
       return state
