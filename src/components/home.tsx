@@ -11,11 +11,13 @@ import {
   CardText,
   Button,
   H1,
-  Hr
+  Hr,
+  Jumbotron
 } from '@bootstrap-styled/v4';
 
 const Home: FunctionComponent = () => (
   <>
+    <img src="/images/banner.jpg" width="100%" />
     <H1 color="secondary">This platform unites on a global scale government- and health organisatons and volunteering hackaton hackers in their combined fights against the COVID-19 pandemic</H1>
     <Hr />
     <Row>
