@@ -5,7 +5,27 @@ import { render } from "react-dom";
 import { withFormik, useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
-import { LabelField, InputField, TextAreaField } from './formStyles'
+import {
+  Badge,
+  Card,
+  CardTitle,
+  CardSubTitle,
+  CardHeader,
+  CardBlock,
+  CardText,
+  Button,
+  Row,
+  Col,
+  H3,
+  H5,
+  H6,
+} from '@bootstrap-styled/v4';
+
+import {
+  LabelField,
+  InputField,
+  TextAreaField
+} from './formStyles'
 
 import {
   MainContainer,
@@ -15,7 +35,6 @@ import {
   SmallHeader
 } from '../components/styles'
 
-import Modal from './modal';
 import { State as ReduxState, Profile } from '../reducers';
 
 export interface Props {
@@ -37,40 +56,140 @@ export const ResponsiveHeader = ({ isMobile, children }: { isMobile: boolean, ch
 
 const profilesOverview = (profile: Profile, index: number) => {
   const [firstLetter, secondLetter] = profile.alias.split(' ').map(s => s.split('')[0])
+
   const Avatar = styled.div`
     border-radius:50%;
     width:100px;
     height:100px;
-    background-color:#606fc8;
+    background:url(http://placebeard.it/100*100);
+    filter: blur(2px);
     font-size:3rem;
+    color:white;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+    transition: box-shadow 83ms;
+  `
+
+  const ProfileCardHeader = styled(CardHeader)`
     display:flex;
     align-items:center;
     justify-content:center;
-    color:white;
+
   `
 
+  const ProfileCard = styled(Card)`
+
+    margin-bottom:20px;
+  `
+
+  const ProfileTitle = styled(CardTitle)`
+    margin-bottom:5px;
+    border:none !important;
+  `
+
+  const ProfileCardDescription = styled.div`
+    line-height: 2.4rem!important;
+    max-height:24px;
+    width:100%;
+    max-height: 2.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+  `
 
   const skills = profile.skills.map((s: any) => s.label).join(', ')
 
   return (
-    <Box row key={index}>
-      {/*  mobile headers on the left side instead of the top */}
 
-      <ResponsiveHeader isMobile={true}>&nbsp;</ResponsiveHeader>
-      <Box px={10} m={2} col><Avatar>{firstLetter}{secondLetter}</Avatar></Box>
+    <Row>
+      <Col sm={{ size: 3 }}>
+        {/*  mobile headers on the left side instead of the top */}
+        <ProfileCard className="text-center">
+          <ProfileCardHeader><Avatar /></ProfileCardHeader>
+          <CardBlock>
+            <ProfileTitle><H3>{profile.alias}</H3></ProfileTitle>
+            <ProfileCardDescription>{profile.description}</ProfileCardDescription>
+            <CardText>
+              {profile.skills.map((p: any) => {
+                return (
+                  <H6 style={{ display: 'inline' }}> <Badge>{p.label}</Badge></H6>
+                )
+              })}
+            </CardText>
+            <Button color="primary">Connect</Button>
+          </CardBlock>
+        </ProfileCard>
+      </Col>
+      <Col sm={{ size: 3 }}>
+        {/*  mobile headers on the left side instead of the top */}
+        <ProfileCard className="text-center">
+          <ProfileCardHeader><Avatar /></ProfileCardHeader>
+          <CardBlock>
+            <ProfileTitle>{profile.alias}</ProfileTitle>
+            <ProfileCardDescription>{profile.description}</ProfileCardDescription>
+            <CardText>
+              {profile.skills.map((p: any) => {
+                return (
+                  <H6 style={{ display: 'inline' }}> <Badge>{p.label}</Badge></H6>
+                )
+              })}
 
-      <ResponsiveHeader isMobile={true}>Alias</ResponsiveHeader>
-      <Box px={10} m={2} col>{profile.alias}</Box>
+            </CardText>
+            <Button color="primary">Connect</Button>
+          </CardBlock>
+        </ProfileCard>
+      </Col>
+      <Col sm={{ size: 3 }}>
+        {/*  mobile headers on the left side instead of the top */}
+        <ProfileCard className="text-center">
+          <ProfileCardHeader><Avatar /></ProfileCardHeader>
+          <CardBlock>
+            <ProfileTitle>{profile.alias}</ProfileTitle>
+            <ProfileCardDescription>{profile.description}</ProfileCardDescription>
+            <CardText>
+              {profile.skills.map((p: any) => {
+                return (
+                  <H6 style={{ display: 'inline' }}> <Badge>{p.label}</Badge></H6>
+                )
+              })}
 
-      <ResponsiveHeader isMobile={true}>Contact</ResponsiveHeader>
-      <Box px={10} m={2} col>{profile.email}</Box>
+            </CardText>
+            <Button color="primary">Connect</Button>
+          </CardBlock>
+        </ProfileCard>
+      </Col>
+      <Col sm={{ size: 3 }}>
+        {/*  mobile headers on the left side instead of the top */}
+        <ProfileCard className="text-center">
+          <ProfileCardHeader><Avatar /></ProfileCardHeader>
+          <CardBlock>
+            <ProfileTitle>{profile.alias}</ProfileTitle>
+            <ProfileCardDescription>{profile.description}</ProfileCardDescription>
+            <CardText>
+              {profile.skills.map((p: any) => {
+                return (
+                  <H6 style={{ display: 'inline' }}> <Badge>{p.label}</Badge></H6>
+                )
+              })}
 
-      <ResponsiveHeader isMobile={true}>Description</ResponsiveHeader>
-      <Box px={10} m={2} col>{profile.description}</Box>
-
-      <ResponsiveHeader isMobile={true}>Skills</ResponsiveHeader>
-      <Box px={10} m={2} col>{skills}</Box>
-    </Box>
+            </CardText>
+            <Button color="primary">Connect</Button>
+          </CardBlock>
+        </ProfileCard>
+      </Col>
+      <Col sm={{ size: 3 }}>
+        {/*  mobile headers on the left side instead of the top */}
+        <ProfileCard className="text-center">
+          <ProfileCardHeader><Avatar /></ProfileCardHeader>
+          <CardBlock>
+            <ProfileTitle>{profile.alias}</ProfileTitle>
+            <ProfileCardDescription>{profile.description}</ProfileCardDescription>
+            <Button color="primary">Connect</Button>
+          </CardBlock>
+        </ProfileCard>
+      </Col>
+    </Row >
   )
 }
 
@@ -84,7 +203,7 @@ const ProfilesComponent: FunctionComponent<Props> = (props: Props) => {
     contact: '',
     email: 'dstomp@appendee.com',
     description: `
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis dui vitae erat rhoncus eleifend. Vestibulum faucibus faucibus lacus. Vivamus eget mollis elit. In tincidunt bibendum lacus tristique gravida. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin nunc neque, blandit et luctus eu, faucibus vitae nisl. Nam ultrices convallis accumsan. Proin ac augue neque. Nullam imperdiet quam sed sem dignissim at sagittis massa imperdiet. Phasellus ante enim, gravida id molestie nec, consectetur eu velit. Sed nibh sapien, tincidunt ut dictum quis, elementum dignissim massa. Suspendisse potenti.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed convallis dui vitae erat rhoncus eleifend. Vestibulum faucibus faucibus lacus. Vivamus eget mollis elit. In tincidunt bibendum lacus tristique gravida. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin nunc neque, blandit et luctus eu, faucibus vitae nisl. Nam ultrices convallis accumsan. Proin ac augue neque. Nullam imperdiet quam sed sem dignissim at sagittis massa imperdiet. Phasellus ante enim, gravida id molestie nec, consectetur eu velit. Sed nibh sapien, tincidunt ut dictum quis, elementum dignissim massa. Suspendisse potenti.
     `,
     skills: [{ value: 'healthcare', label: 'healthcare' }, { value: 'physical therapy', label: 'physical therapy' }],
     avatar: ''
@@ -97,25 +216,8 @@ const ProfilesComponent: FunctionComponent<Props> = (props: Props) => {
     dispatch({ type: "EDIT_PROFILE", payload: profile })
   }
 
-  //Stop scanning modal
-  const stopEditProfile = useCallback(
-    () => dispatch({ type: "CANCEL_EDIT_PROFILE" }),
-    [dispatch]
-  )
-
-
-  //Modal is a React portal component, not rendered here but as a first child of the body component
   return (
     <>
-      {/* Box headers only for desktop */}
-      <Box row>
-        <Box px={10} m={2} col display={{ xs: 'none', sm: 'none', md: 'block', 'lg': 'block', xl: 'block' }}>&nbsp;</Box>
-        <ResponsiveHeader isMobile={false}>Name</ResponsiveHeader>
-        <ResponsiveHeader isMobile={false}>Contact</ResponsiveHeader>
-        <ResponsiveHeader isMobile={false}>Description</ResponsiveHeader>
-        <ResponsiveHeader isMobile={false}>Skills</ResponsiveHeader>
-      </Box>
-
       {(profiles.map(profilesOverview))}
     </>
   )
