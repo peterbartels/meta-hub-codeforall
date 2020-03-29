@@ -2,6 +2,7 @@ import React, { useCallback, FunctionComponent } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import useTypewriter from 'react-use-typewriter'
 import { useDispatch } from 'react-redux'
+import { Link } from "react-router-dom";
 
 import {
   Centered,
@@ -33,23 +34,28 @@ const HeaderComponent: FunctionComponent = () => {
   return (<>
     <NameContainer>
       <Name>
-        <FontAwesomeIcon icon="heart" size="2x" /><span>Hacking Corona</span>
+        <FontAwesomeIcon icon="heart" size="2x" /><span>Health Hackers Hub</span>
       </Name>
 
       <MenuContainer>
-        <MenuItem onClick={dispatchStartAddProfile}>
-          <FontAwesomeIcon icon="home" size="2x" />
-          <span>Home</span>
-        </MenuItem>
-        <MenuItem onClick={dispatchStartAddProfile}>
-          <FontAwesomeIcon icon="user" size="2x" />
-          <span>Profile</span>
-        </MenuItem>
-        <MenuItem onClick={dispatchStartAddProfile}>
-          <FontAwesomeIcon icon="search" size="2x" />
-          <span>Search</span>
-        </MenuItem>
-
+        <Link to="/home">
+          <MenuItem onClick={dispatchStartAddProfile}>
+            <FontAwesomeIcon icon="home" size="2x" />
+            <span>Home</span>
+          </MenuItem>
+        </Link>
+        <Link to="/my-profile">
+          <MenuItem onClick={dispatchStartAddProfile}>
+            <FontAwesomeIcon icon="user" size="2x" />
+            <span>My Profile</span>
+          </MenuItem>
+        </Link>
+        <Link to="/profiles">
+          <MenuItem onClick={dispatchStartAddProfile}>
+            <FontAwesomeIcon icon="search" size="2x" />
+            <span>Search</span>
+          </MenuItem>
+        </Link>
       </MenuContainer>
     </NameContainer>
   </>)
