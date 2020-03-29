@@ -5,7 +5,18 @@ import { render } from "react-dom";
 import { withFormik, useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
-import { LabelField, InputField, TextAreaField } from './formStyles'
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  Option,
+  Button,
+} from '@bootstrap-styled/v4';
+
+import { FormContainer, LabelField, InputField, TextAreaField } from './formStyles'
 import {
   MainContainer,
   EditProfileContainer,
@@ -61,90 +72,149 @@ const EditProfileForm = () => {
   } = formik;
 
   return (
+    <FormContainer>
+      <SmallHeader>Your profile</SmallHeader>
+      <Form onSubmit={handleSubmit}>
+        <FormGroup>
+          <SmallHeader>Your information</SmallHeader>
+          <LabelField htmlFor="alias" style={{ display: "block" }}>
+            Alias
+          </LabelField>
+          <Input
+            id="alias"
+            placeholder="Enter your alias"
+            type="alias"
+            value={values.alias}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </FormGroup>
+        <FormGroup>
+          <LabelField htmlFor="email" style={{ display: "block" }}>
+            Email
+          </LabelField>
+          <Input
+            id="email"
+            placeholder="Enter your email"
+            type="email"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {errors.email && touched.email && (
+            <div style={{ color: "red", marginTop: ".5rem" }}>{errors.email}</div>
+          )}
+        </FormGroup>
+        <FormGroup>
+          <LabelField htmlFor="LinkedIn" style={{ display: "block" }}>
+            Linkedin
+          </LabelField>
+          <Input
+            id="linkedin"
+            placeholder="Enter your LinkedIn"
+            type="LinkedIn"
+            value={values.linkedin}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </FormGroup>
+        <FormGroup controlId="formDescription">
+          <Label htmlFor="inline-form-input">Description</Label>
+          <Input
+            type="textarea"
+            className="form-control"
+            id="description"
+            rows={15}
+            cols={40}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </FormGroup>
+        <MySelect
+          value={values.skills}
+          onChange={setFieldValue}
+          onBlur={setFieldTouched}
+          error={errors.skills}
+          touched={touched.skills}
+        />
+        <Button color="primary" type="submit">Submit</Button>
+      </Form>
 
-    <form onSubmit={handleSubmit} >
-      <SmallHeader>Your information</SmallHeader>
-      <LabelField htmlFor="alias" style={{ display: "block" }}>
-        Alias
-      </LabelField>
-      <input
-        id="alias"
-        placeholder="Enter your alias"
-        type="alias"
-        value={values.alias}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      {/*<form onSubmit={handleSubmit} >
+          <SmallHeader>Your information</SmallHeader>
+          <LabelField htmlFor="alias" style={{ display: "block" }}>
+          Alias
+          </LabelField>
+          <input
+          id="alias"
+          placeholder="Enter your alias"
+          type="alias"
+          value={values.alias}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          />
 
-      <LabelField htmlFor="LinkedIn" style={{ display: "block" }}>
-        Linkedin
-      </LabelField>
-      <input
-        id="LinkedIn"
-        placeholder="Enter your LinkedIn"
-        type="LinkedIn"
-        value={values.linkedin}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-      <LabelField htmlFor="email" style={{ display: "block" }}>
-        Email
-      </LabelField>
-      <input
-        id="email"
-        placeholder="Enter your email"
-        type="email"
-        value={values.email}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-      {errors.email && touched.email && (
-        <div style={{ color: "red", marginTop: ".5rem" }}>{errors.email}</div>
-      )
-      }
-      <LabelField htmlFor="description" style={{ display: "block" }}>
-        Description
-      </LabelField>
-      <TextAreaField
-        id="description"
-        rows={15}
-        cols={40}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      >{values.description}
-      </TextAreaField>
-      <LabelField htmlFor="category" style={{ display: "block" }}>
-        Category
-      </LabelField>
-      <input
-        id="category"
-        placeholder="Select a category"
-        type="category"
-        value={values.category}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-      <MySelect
-        value={values.skills}
-        onChange={setFieldValue}
-        onBlur={setFieldTouched}
-        error={errors.skills}
-        touched={touched.skills}
-      />
-      {/* TODO: I don't think we need a reset button
-          <button
-          type="button"
-          className="outline"
-          onClick={handleReset}
-          disabled={!dirty || isSubmitting}
-          >
-          Reset
-          </button>*/}
-      <button type="submit" disabled={isSubmitting}>
-        Save my information
-      </button>
+          <LabelField htmlFor="LinkedIn" style={{ display: "block" }}>
+          Linkedin
+          </LabelField>
+          <input
+          id="LinkedIn"
+          placeholder="Enter your LinkedIn"
+          type="LinkedIn"
+          value={values.linkedin}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          />
+          <LabelField htmlFor="email" style={{ display: "block" }}>
+          Email
+          </LabelField>
+          <input
+          id="email"
+          placeholder="Enter your email"
+          type="email"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          />
+          {errors.email && touched.email && (
+          <div style={{ color: "red", marginTop: ".5rem" }}>{errors.email}</div>
+          )
+          }
+          <LabelField htmlFor="description" style={{ display: "block" }}>
+          Description
+          </LabelField>
+          <TextAreaField
+          id="description"
+          rows={15}
+          cols={40}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          >{values.description}
+          </TextAreaField>
+          <LabelField htmlFor="category" style={{ display: "block" }}>
+          Category
+          </LabelField>
+          <input
+          id="category"
+          placeholder="Select a category"
+          type="category"
+          value={values.category}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          />
+          <MySelect
+          value={values.skills}
+          onChange={setFieldValue}
+          onBlur={setFieldTouched}
+          error={errors.skills}
+          touched={touched.skills}
+          />
+          <button type="submit" disabled={isSubmitting}>
+          Save my information
+          </button>
 
-    </form >
+          </form > */}
+    </FormContainer >
   );
 };
 

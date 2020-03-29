@@ -12,3 +12,7 @@ export const InputField = styled.input`
 export const TextAreaField = styled.textarea`
   font-family: 'Nunito'; 
 `
+
+export const FormContainer = styled.div`
+  text-align:left;
+`
