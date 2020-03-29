@@ -28,7 +28,7 @@ const Home: FunctionComponent = () => (
             <Hr />
             <CardTitle>ORGANISATIONS</CardTitle>
             <CardText>Can search for skills and availability amongst hackers and reach out to them to ask their help.</CardText>
-            <Button color="primary">Go to search</Button>
+            <Button color="primary">Search now</Button>
           </CardBlock>
         </Card>
       </Col>
@@ -39,7 +39,7 @@ const Home: FunctionComponent = () => (
             <Hr />
             <CardTitle>HACKERS</CardTitle>
             <CardText>Can help by adding a personal profile including skills and when available to join the fight.</CardText>
-            <Button color="primary">Add my profile</Button>
+            <Button color="primary">Add me</Button>
           </CardBlock>
         </Card>
       </Col>
@@ -50,6 +50,7 @@ const Home: FunctionComponent = () => (
             <Hr />
             <CardTitle>FUTURE</CardTitle>
             <CardText>Connecting hackers affiliated to nation based health(tech) hackatons on a global scale.</CardText>
+            <Button color="primary">Read more</Button>
           </CardBlock>
         </Card>
       </Col>

@@ -76,7 +76,6 @@ const EditProfileForm = () => {
       <SmallHeader>Your profile</SmallHeader>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <SmallHeader>Your information</SmallHeader>
           <LabelField htmlFor="alias" style={{ display: "block" }}>
             Alias
           </LabelField>
