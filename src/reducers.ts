@@ -41,7 +41,7 @@ const currentProfile = (state: State = {
     case "CANCEL_EDIT_PROFILE":
       return {
         ...state,
-
+        editProfile: false,
       }
     default:
       return state

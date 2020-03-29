@@ -105,18 +105,19 @@ export const Content = styled(Centered)`
   padding: 30px;
   color: black;
   display: block;
+  box-shadow:0px 9px 7px -5px #000000;
 `
 
 export const FooterContainer = styled(MainContainer)`
-
+  background: #414756;
 `
 
 export const Footer = styled(Centered)`
-  background: #414756;
   color:white;
-  height: 40px;
+  height: 150px;
   padding: 40px;
   font-family: 'Sen';
+  box-shadow:0px 9px 7px -5px #fff;
 `
 
 export const EditProfileContainer = styled.div`

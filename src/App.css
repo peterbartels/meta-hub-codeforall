@@ -94,7 +94,7 @@ button {
   color: #fff;
 }
 
-body > #root > div {
+body > #root > div > div, body > #root > div {
   min-height: 100vh;
   display:flex;
   flex-direction:column;
