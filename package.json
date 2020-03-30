@@ -13,6 +13,7 @@
     "@types/react-select": "^3.0.11",
     "@types/yup": "^0.26.33",
     "@xstyled/styled-components": "^1.17.0",
+    "axios": "^0.19.2",
     "formik": "^2.1.4",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

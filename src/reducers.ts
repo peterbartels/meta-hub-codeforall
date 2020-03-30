@@ -5,7 +5,9 @@ export interface Profile {
   email: string,
   description: string
   skills: any
+  competences?: any
   avatar: string
+  picture?: string
 }
 
 export interface State {
