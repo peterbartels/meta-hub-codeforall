@@ -17,12 +17,19 @@ import {
   CardBlock,
   CardText,
   Button,
+  Form,
+  FormGroup,
   Row,
   Col,
   H3,
   H5,
   H6,
+  Label,
+  Input,
+  InputGroup,
+  InputGroupAddon,
 } from '@bootstrap-styled/v4';
+
 
 import {
   LabelField,
@@ -125,7 +132,7 @@ const ProfilesOverview: FunctionComponent<ProfilesOverviewProps> = (props) => {
           {skills} {competences}
         </CardText>
 
-        <Button color="primary">Full profile</Button>
+        <Button color="secondary">Full profile</Button>
       </CardBlock>
     </ProfileCard>
   )
@@ -162,17 +169,31 @@ const ProfilesComponent: FunctionComponent = (props) => {
      }
    */
   return (
-    <Row>
-      {randomUsers.map((profile: Profile, index: number) => {
-        const randomSkill = Math.floor((Math.random() * 3) % 3)
-        profile.skills = profile.skills.length == 0 ? [skills[randomSkill]] : profile.skills
-        const randomCompetence = Math.floor((Math.random() * competences.length) % competences.length)
+    <>
+      <Row>
+        <Form>
+          <FormGroup>
+            <InputGroup>
+              <InputGroupAddon>@</InputGroupAddon>
+              <Input id="alias" placeholder="Search for alias, skills, competences" type="alias" style={{ width: '400px' }} />
+            </InputGroup>
+          </FormGroup>
+        </Form>
+      </Row>
 
-        profile.competences = profile.competences.length == 0 ? [competences[randomCompetence]] : profile.competences
 
-        return (<Col sm={{ size: 3 }} key={index}><ProfilesOverview profile={profile} /></Col>)
-      })}
-    </Row>
+      <Row>
+        {randomUsers.map((profile: Profile, index: number) => {
+          const randomSkill = Math.floor((Math.random() * 3) % 3)
+          profile.skills = profile.skills.length == 0 ? [skills[randomSkill]] : profile.skills
+          const randomCompetence = Math.floor((Math.random() * competences.length) % competences.length)
+
+          profile.competences = profile.competences.length == 0 ? [competences[randomCompetence]] : profile.competences
+
+          return (<Col sm={{ size: 3 }} key={index}><ProfilesOverview profile={profile} /></Col>)
+        })}
+      </Row>
+    </>
   )
 }
 
