@@ -18,6 +18,7 @@ import {
 } from '@bootstrap-styled/v4';
 
 import competences from '../data/competences'
+import skills from '../data/skills'
 
 import { FormContainer, LabelField, InputField, TextAreaField } from './formStyles'
 import {
@@ -27,12 +28,6 @@ import {
   NumberInput,
   SmallHeader
 } from '../components/styles'
-
-const skills = [
-  { value: "Technical", label: "Technical" },
-  { value: "Medical", label: "Medical" },
-  { value: "Government", label: "Government" },
-];
 
 const EditProfileForm = () => {
 
