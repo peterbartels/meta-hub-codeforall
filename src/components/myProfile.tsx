@@ -60,7 +60,6 @@ const EditProfileForm = () => {
       category: '',
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
       dispatch({ type: "UPDATE_PROFILE", payload: values })
       setSubmit(true)
     },

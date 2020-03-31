@@ -34,31 +34,31 @@ const HeaderComponent: FunctionComponent = () => {
   return (<>
     <NameContainer>
       <Name>
-        <FontAwesomeIcon icon="heart" size="2x" /><span>Health Hackers Hub</span>
+        <FontAwesomeIcon icon="heart" size="2x" color="#0289C8" /><span>Health Hacker Hub</span>
       </Name>
 
       <MenuContainer>
         <Link to="/home">
           <MenuItem onClick={dispatchStartAddProfile}>
-            <FontAwesomeIcon icon="home" size="2x" />
+            <FontAwesomeIcon icon="home" size="2x" color="#0289C8" />
             <span>Home</span>
           </MenuItem>
         </Link>
         <Link to="/my-profile">
           <MenuItem onClick={dispatchStartAddProfile}>
-            <FontAwesomeIcon icon="user" size="2x" />
+            <FontAwesomeIcon icon="user" size="2x" color="#0289C8" />
             <span>My Profile</span>
           </MenuItem>
         </Link>
         <Link to="/profiles">
           <MenuItem onClick={dispatchStartAddProfile}>
-            <FontAwesomeIcon icon="user-cog" size="2x" />
+            <FontAwesomeIcon icon="user-cog" size="2x" color="#0289C8" />
             <span>Hackers</span>
           </MenuItem>
         </Link>
         <Link to="/organisations">
           <MenuItem>
-            <FontAwesomeIcon icon="building" size="2x" />
+            <FontAwesomeIcon icon="building" size="2x" color="#0289C8" />
             <span>Organisations</span>
           </MenuItem>
         </Link>

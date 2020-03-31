@@ -75,7 +75,7 @@ export const Centered = styled.div`
 `
 
 export const Header = styled(Centered)`
-  background: #606fc8;
+  background: #0289C8;
   padding:15px 15px 15px 15px;
   border-radius: 5px 5px 0px 0px;
   a {
@@ -127,7 +127,7 @@ export const EditProfileContainer = styled.div`
 `
 
 export const PrimaryButton = styled.button`
-  background: #606fc8;
+  background: #0289C8;
   color:white;
   border: solid 1px white;  
 `

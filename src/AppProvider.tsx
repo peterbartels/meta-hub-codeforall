@@ -55,7 +55,7 @@ const AppProvider: FunctionComponent = ({ children }) => {
     <ReduxProvider store={store}>
       <ThemeProvider theme={theme}>
         <BootstrapProvider theme={{
-          '$btn-primary-bg': '#606fc8'
+          '$btn-primary-bg': '#0289C8'
         }}>
           <App />
         </BootstrapProvider>

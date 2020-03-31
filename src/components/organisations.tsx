@@ -60,22 +60,20 @@ const Organisations: FunctionComponent = () => (
       <Col sm={{ size: 10 }}>
         <H3>Nederlands Huisartsen Genootschap</H3>
       </Col>
-      <Col sm={{ size: 1 }} style={{ marginTop: '20px' }}><Button color="primary">Join</Button></Col>
-      <Col sm={{ size: 11 }} style={{ marginTop: '20px' }}>
-        <H5>Projects</H5>
+      <Col sm={{ size: 2 }} style={{ marginTop: '20px' }}><Button color="primary">Join</Button></Col>
+      <Col sm={{ size: 10 }} style={{ marginTop: '20px' }}>
+        <H5>Project</H5>
       </Col>
-      <Col sm={{ size: 1 }}></Col>
-      <Col sm={{ size: 2 }}>
-        <b>Title</b>
-      </Col>
-      <Col sm={{ size: 9 }}>
+      <Col sm={{ size: 2 }}></Col>
+      <Col sm={{ size: 10 }}>
         Hoe kunnen we in crisis situaties onze patienten helder en eenduidig informeren?
       </Col>
-      <Col sm={{ size: 1 }}></Col>
-      <Col sm={{ size: 2 }}>
-        <b>Searching for:</b>
+      <Col sm={{ size: 2 }}></Col>
+      <Col sm={{ size: 10 }} style={{ marginTop: '20px' }}>
+        <H5>Searching for</H5>
       </Col>
-      <Col sm={{ size: 9 }}>
+      <Col sm={{ size: 2 }}></Col>
+      <Col sm={{ size: 10 }}>
         Communicatie, programmeervaardigheden, design, projectmanagement, medische kennis
       </Col>
     </Row>
@@ -87,50 +85,47 @@ const Organisations: FunctionComponent = () => (
       <Col sm={{ size: 10 }}>
         <H3>Nederlandse Vereniging voor Intensive Care</H3>
       </Col>
-      <Col sm={{ size: 1 }} style={{ marginTop: '20px' }}><Button color="primary">Join</Button></Col>
-      <Col sm={{ size: 11 }} style={{ marginTop: '20px' }}>
-        <H5>Projects</H5>
+      <Col sm={{ size: 2 }} style={{ marginTop: '20px' }}><Button color="primary">Join</Button></Col>
+      <Col sm={{ size: 10 }} style={{ marginTop: '20px' }}>
+        <H5>Project</H5>
       </Col>
-      <Col sm={{ size: 1 }}></Col>
-      <Col sm={{ size: 2 }}>
-        <b>Title</b>
-      </Col>
-      <Col sm={{ size: 9 }}>
+      <Col sm={{ size: 2 }}></Col>
+      <Col sm={{ size: 10 }}>
         Hoe zorgen wij ervoor dat de totale beschikbare beddencapaciteit in Nederland real-time inzichtelijk is?
       </Col>
-      <Col sm={{ size: 1 }}></Col>
-      <Col sm={{ size: 2 }}>
-        <b>Searching for:</b>
+      <Col sm={{ size: 2 }}></Col>
+      <Col sm={{ size: 10 }} style={{ marginTop: '20px' }}>
+        <H5>Searching for</H5>
       </Col>
-      <Col sm={{ size: 9 }}>
+      <Col sm={{ size: 2 }}></Col>
+      <Col sm={{ size: 10 }}>
         projectmanagement, software ontwikkelaars (JAVA, Python, React JS, REST API, JSON, XML, PostgreSQL, ORACLE)
       </Col>
     </Row>
+
     <Hr />
     <Row style={{ marginTop: '30px', marginBottom: '30px' }}>
       <Col sm={{ size: 2 }}>
         <img src="/images/rivm.jpg" height="40" />
       </Col>
       <Col sm={{ size: 10 }}>
-        <H3>Rijksinstituut voor Volksgezondheid en Miliue (RIVM)</H3>
+        <H3>Rijksinstituut voor Volksgezondheid en Milieu (RIVM)</H3>
       </Col>
-      <Col sm={{ size: 1 }} style={{ marginTop: '20px' }}><Button color="primary">Join</Button></Col>
-      <Col sm={{ size: 11 }} style={{ marginTop: '20px' }}>
-        <H5>Projects</H5>
+      <Col sm={{ size: 2 }} style={{ marginTop: '20px' }}><Button color="primary">Join</Button></Col>
+      <Col sm={{ size: 10 }} style={{ marginTop: '20px' }}>
+        <H5>Project</H5>
       </Col>
-      <Col sm={{ size: 1 }}></Col>
-      <Col sm={{ size: 2 }}>
-        <b>Title</b>
+      <Col sm={{ size: 2 }}></Col>
+      <Col sm={{ size: 10 }}>
+        Hoe brengen we visualiseren we voorspelde groei van de Corona uitbraak.
       </Col>
-      <Col sm={{ size: 9 }}>
-        Hoe zorgen wij ervoor dat de totale beschikbare beddencapaciteit in Nederland real-time inzichtelijk is?
+      <Col sm={{ size: 2 }}></Col>
+      <Col sm={{ size: 10 }} style={{ marginTop: '20px' }}>
+        <H5>Searching for</H5>
       </Col>
-      <Col sm={{ size: 1 }}></Col>
-      <Col sm={{ size: 2 }}>
-        <b>Searching for:</b>
-      </Col>
-      <Col sm={{ size: 9 }}>
-        projectmanagement, software ontwikkelaars (JAVA, Python, React JS, REST API, JSON, XML, PostgreSQL, ORACLE)
+      <Col sm={{ size: 2 }}></Col>
+      <Col sm={{ size: 10 }}>
+        Python, AI, machine learning, biomedical sciences
       </Col>
     </Row>
   </div >
