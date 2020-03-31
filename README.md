@@ -1,3 +1,5 @@
+## Hackathon (3 days) for Dutch Hacking Health so that people can share their knowledge and profile so that they can contribute in helping fight COVID-19
+
 # Instructions
 
 In the project directory, you can run:
