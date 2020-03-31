@@ -11,6 +11,7 @@ import {
   CardText,
   Button,
   H1,
+  H2,
   Hr,
   Jumbotron
 } from '@bootstrap-styled/v4';
@@ -18,9 +19,9 @@ import {
 const Home: FunctionComponent = () => (
   <>
     <img src="/images/banner.jpg" width="100%" />
-    <H1 color="secondary">This platform unites on a global scale government- and health organisatons and volunteering hackaton hackers in their combined fights against the COVID-19 pandemic</H1>
+    <H2 color="secondary" style={{ marginTop: '30px', marginBottom: '30px' }}>This platform unites on a global scale government- and health organisatons and volunteering hackaton hackers in their combined fights against the COVID-19 pandemic</H2>
     <Hr />
-    <Row>
+    <Row style={{ marginTop: '30px', marginBottom: '30px' }}>
       <Col sm={{ size: 4 }}>
         <Card>
           <CardBlock>
@@ -56,8 +57,10 @@ const Home: FunctionComponent = () => (
       </Col>
     </Row>
     <Hr />
-    <H1>ABOUT US</H1>
-    This platform is the result of our teameffort at de Hack Corona hackaton hosted from 27-31 march 2020 by Dutch Hacking Health.
+    <H1 style={{ marginTop: '30px', marginBottom: '30px' }}>Contributers</H1>
+    <div>Harm Visser (Organizer)</div>
+    <div>Peter Bartels (Development)</div>
+    <div>Derrick Stom (Participant)</div>
   </>
 )
 

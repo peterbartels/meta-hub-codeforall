@@ -42,7 +42,7 @@ const EditProfileForm = () => {
         .email("Invalid email address")
         .required("Email is required!"),
       skills: Yup.array()
-        .min(1, "Pick at least 1 skill")
+        .min(1, "Pick at least 1 industry")
         .of(
           Yup.object().shape({
             label: Yup.string().required(),
@@ -151,6 +151,7 @@ const EditProfileForm = () => {
             options={skills}
             touched={touched.skills}
             name="skills"
+            title="Industry"
           />
           <MySelect
             value={values.competences}
@@ -160,6 +161,7 @@ const EditProfileForm = () => {
             options={competences}
             touched={touched.competences}
             name="competences"
+            title="Skills"
           />
           <Button color="primary" type="submit">Submit</Button>
         </Form>
@@ -182,7 +184,7 @@ class MySelect extends React.Component<any> {
   render() {
     return (
       <div style={{ margin: "1rem 0" }}>
-        <LabelField htmlFor="skills">Skills</LabelField>
+        <LabelField htmlFor="skills">{this.props.title}</LabelField>
         <Select
           id="skills"
           options={this.props.options}

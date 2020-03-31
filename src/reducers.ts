@@ -4,6 +4,7 @@ export interface Profile {
   contact: string,
   email: string,
   description: string
+  linkedin: string
   skills: any
   competences?: any
   avatar: string

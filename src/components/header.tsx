@@ -52,8 +52,14 @@ const HeaderComponent: FunctionComponent = () => {
         </Link>
         <Link to="/profiles">
           <MenuItem onClick={dispatchStartAddProfile}>
-            <FontAwesomeIcon icon="search" size="2x" />
-            <span>Search</span>
+            <FontAwesomeIcon icon="user-cog" size="2x" />
+            <span>Hackers</span>
+          </MenuItem>
+        </Link>
+        <Link to="/organisations">
+          <MenuItem>
+            <FontAwesomeIcon icon="building" size="2x" />
+            <span>Organisations</span>
           </MenuItem>
         </Link>
       </MenuContainer>

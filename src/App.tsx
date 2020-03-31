@@ -7,6 +7,7 @@ import {
 
 import Header from './components/header'
 import Home from './components/home'
+import Organisations from './components/organisations'
 import MyProfile from './components/myProfile'
 import Footer from './components/footer'
 import Profiles from './components/profiles'
@@ -24,6 +25,7 @@ const App: FunctionComponent = () => (
           <Switch>
             <Route path="/profiles" component={Profiles} />
             <Route path="/my-profile" component={MyProfile} />
+            <Route path="/organisations" component={Organisations} />
             <Route path="/" component={Home} />
           </Switch>
         </Content>

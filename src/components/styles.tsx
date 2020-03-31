@@ -21,7 +21,7 @@ export const Name = styled.div`
   color: #A9A9A9;
   margin-left:200px;
   font-family: 'Nunito';
-  font-size: 1rem;;
+  font-size: 2rem;;
   padding: 30px 0px 30px 15px;  
   ${columnFlexCss} 
   span {
@@ -34,7 +34,7 @@ export const MenuContainer = styled.div`
   
   flex:1;
   margin-top:10px;
-  margin-left:250px;
+  margin-left:30px;
   div {
   font-family: 'Sen';
   font-weight: bold;
@@ -45,7 +45,7 @@ export const MenuItem = styled.div`
   color: #A9A9A9;
   font-family: 'Sen';
   text-transform: uppercase;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: bold;
   display: flex;
   align-items: center;
