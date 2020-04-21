@@ -19,6 +19,7 @@ import {
 
 import competences from '../data/competences'
 import skills from '../data/skills'
+import { useAuth0 } from "../auth/auth0";
 
 import { FormContainer, LabelField, InputField, TextAreaField } from './formStyles'
 import {
@@ -31,6 +32,7 @@ import {
 
 const EditProfileForm = () => {
 
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0() as any;
   const dispatch = useDispatch()
   const [submit, setSubmit] = useState(false)
 
@@ -109,7 +111,8 @@ const EditProfileForm = () => {
               id="email"
               placeholder="Enter your email"
               type="email"
-              value={values.email}
+              disabled
+              value={user.email}
               onChange={handleChange}
               onBlur={handleBlur}
             />
