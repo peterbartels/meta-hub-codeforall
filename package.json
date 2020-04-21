@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.7.0",
     "@bootstrap-styled/provider": "^2.0.2",
     "@bootstrap-styled/v4": "^3.4.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",

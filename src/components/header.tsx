@@ -4,6 +4,8 @@ import useTypewriter from 'react-use-typewriter'
 import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 
+import { useAuth0 } from "../auth/auth0";
+
 import {
   Centered,
   NameContainer,
@@ -16,6 +18,8 @@ import {
 } from './styles'
 
 const HeaderComponent: FunctionComponent = () => {
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0() as any; //no typings for auth0 at the moment
+  const blah = useAuth0() as any
 
   const typerWords = ["Hacking Corona", "An initiative by Dtuch Hack Health"]
   const currentTyperWord = useTypewriter({
@@ -30,6 +34,11 @@ const HeaderComponent: FunctionComponent = () => {
     () => (dispatch({ type: "EDIT_PROFILE", payload: true })),
     [dispatch]
   );
+
+  const logoutWithRedirect = () =>
+    logout({
+      returnTo: window.location.origin
+    });
 
   return (<>
     <NameContainer>
@@ -62,6 +71,14 @@ const HeaderComponent: FunctionComponent = () => {
             <span>Organisations</span>
           </MenuItem>
         </Link>
+        <MenuItem onClick={() => loginWithRedirect({})}>
+          <FontAwesomeIcon icon="user-cog" size="2x" color="#0289C8" />
+          <span>Login</span>
+        </MenuItem>
+        <MenuItem onClick={() => logoutWithRedirect()}>
+          <FontAwesomeIcon icon="user-cog" size="2x" color="#0289C8" />
+          <span>Logout</span>
+        </MenuItem>
       </MenuContainer>
     </NameContainer>
   </>)
