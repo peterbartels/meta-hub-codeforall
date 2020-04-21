@@ -28,15 +28,16 @@ export const Auth0Provider = ({
         window.location.search.includes("code=") &&
         window.location.search.includes("state=")
       ) {
-        onRedirectCallback();
+        const { appState } = await auth0FromHook.handleRedirectCallback();
+        onRedirectCallback(appState);
       }
 
       const isAuthenticated = await auth0FromHook.isAuthenticated();
-      console.log(isAuthenticated)
       setIsAuthenticated(isAuthenticated);
 
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
+        console.log(user)
         setUser(user);
       }
 
