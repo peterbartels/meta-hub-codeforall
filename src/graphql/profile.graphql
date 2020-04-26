@@ -1,0 +1,34 @@
+
+type Profile {
+  alias: String!
+  email: String!
+  linkedin: String
+  description: String!
+  skills: [String!]!
+  categories: [String]!
+}
+
+type Query {
+   allProfiles: [Profile!]
+}
+
+mutation CreateAProfile {
+   createProfile(data: {
+   alias: "Peter"
+   email: "peterbartels@gmail.com"
+   description: "test"
+   skills:["none"]
+   categories:["d"]
+   }) {
+       alias
+   }
+}
+
+query getAllProfiles {
+  allProfiles() {
+      data {
+        _id
+        alias
+      }
+   }
+}

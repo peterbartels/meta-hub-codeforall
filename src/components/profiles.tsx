@@ -6,7 +6,9 @@ import { render } from "react-dom";
 import { withFormik, useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
-import competences from '../data/competences'
+import { gql } from "apollo-boost";
+import { Query } from "react-apollo";
+import industries from '../data/competences'
 import skills from '../data/skills'
 import {
   Badge,
@@ -57,8 +59,6 @@ const BoxHeader = styled(Box)`
 interface ProfilesOverviewProps {
   profile: Profile
 }
-
-
 
 //box-shadow: 0 0 0 1px rgba(0,0,0,.15); -> from linkedin
 const Avatar = styled.div`
@@ -111,16 +111,17 @@ const ProfileCardDescription = styled.div`
 
 
 const ProfilesOverview: FunctionComponent<any> = (props) => {
+
   const { profile, handleClick } = props
-  const skills = profile.skills.map((s: any, index: number) => {
+  const industries = (profile.competences || profile.industries || []).map((s: any, index: number) => {
     return (
-      <H6 key={index} style={{ display: 'inline' }}> <Badge>{s.label}</Badge></H6>
+      <span key={index} style={{ display: 'inline' }}> <Badge>{s.label}</Badge></span>
     )
   })
 
-  const competences = profile.competences.map((s: any, index: number) => {
+  const skills = profile.skills.map((s: any, index: number) => {
     return (
-      <H6 key={index} style={{ display: 'inline' }}> <Badge color="primary">{s.label}</Badge></H6>
+      <span key={index} style={{ display: 'inline' }}> <Badge color="primary">{s.label}</Badge></span>
     )
   })
 
@@ -128,12 +129,12 @@ const ProfilesOverview: FunctionComponent<any> = (props) => {
     <ProfileCard className="text-center">
       <ProfileCardHeader><Avatar image={profile.picture} /></ProfileCardHeader>
       <CardBlock>
-        <ProfileTitle><H3>{profile.alias}</H3></ProfileTitle>
+        <ProfileTitle>{profile.alias}</ProfileTitle>
         <ProfileCardDescription>{profile.description}</ProfileCardDescription>
         <CardText>
         </CardText>
         <CardText>
-          {skills} {competences}
+          {industries} {skills}
         </CardText>
 
         <Button color="secondary" onClick={handleClick(profile)}>Full profile</Button>
@@ -150,7 +151,7 @@ const ProfileView: FunctionComponent<{ profile: Profile }> = (props) => {
     )
   })
 
-  const competences = profile.competences.map((s: any, index: number) => {
+  const competences = (profile.competences || []).map((s: any, index: number) => {
     return (
       <H6 key={index} style={{ display: 'inline' }}> <Badge color="primary">{s.label}</Badge></H6>
     )
@@ -229,6 +230,8 @@ const ProfilesComponent: FunctionComponent = (props) => {
      const handleSubmit = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
      evt.preventDefault();
      dispatch({ type: "EDIT_PROFILE", payload: profile })
+
+     
      }
    */
   return currentProfile ? <ProfileView profile={currentProfile} /> : (
@@ -245,12 +248,37 @@ const ProfilesComponent: FunctionComponent = (props) => {
       </Row>
 
       <Row>
+        <Query
+          query={gql`
+            {
+              allProfiles {
+                alias
+                email
+                linkedin
+                description
+                skills
+                categories
+              }
+            }
+          `}
+        >
+          {(profile: any) => {
+            return !profile.data ? null : (
+              <>
+                {profile.data.allProfiles.map((p: any, index: number) => (
+                  <Col sm={{ size: 3 }} key={index} ><ProfilesOverview profile={p} handleClick={handleClick} /></Col>
+                ))}
+              </>
+            )
+          }}
+        </Query>
+
         {randomUsers.map((profile: Profile, index: number) => {
           const randomSkill = Math.floor((Math.random() * 3) % 3)
           profile.skills = profile.skills.length == 0 ? [skills[randomSkill]] : profile.skills
-          const randomCompetence = Math.floor((Math.random() * competences.length) % competences.length)
+          const randomCompetence = Math.floor((Math.random() * industries.length) % industries.length)
 
-          profile.competences = profile.competences.length == 0 ? [competences[randomCompetence]] : profile.competences
+          profile.competences = profile.competences.length == 0 ? [industries[randomCompetence]] : profile.competences
 
           return (<Col sm={{ size: 3 }} key={index}><ProfilesOverview profile={profile} handleClick={handleClick} /></Col>)
         })}

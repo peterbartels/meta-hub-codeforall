@@ -17,7 +17,8 @@ import {
   Button,
 } from '@bootstrap-styled/v4';
 
-import competences from '../data/competences'
+import api from '../utils/api'
+import industries from '../data/competences'
 import skills from '../data/skills'
 import { useAuth0 } from "../auth/auth0";
 
@@ -40,10 +41,7 @@ const EditProfileForm = () => {
     validationSchema: Yup.object().shape({
       alias: Yup.string()
         .required("Alias is required!"),
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required!"),
-      skills: Yup.array()
+      industries: Yup.array()
         .min(1, "Pick at least 1 industry")
         .of(
           Yup.object().shape({
@@ -57,13 +55,18 @@ const EditProfileForm = () => {
       linkedin: '',
       email: '',
       skills: [],
-      competences: [],
+      industries: [],
       description: '',
       category: '',
     },
-    onSubmit: values => {
-      dispatch({ type: "UPDATE_PROFILE", payload: values })
-      setSubmit(true)
+    onSubmit: profile => {
+      // Make API request to create new profile
+      api.create(values).then((response: any) => {
+        dispatch({ type: "UPDATE_PROFILE", payload: values })
+        setSubmit(true)
+      }).catch((e: any) => {
+        console.log('An API error occurred', e)
+      })
     },
   });
 
@@ -145,7 +148,17 @@ const EditProfileForm = () => {
               onBlur={handleBlur}
             />
           </FormGroup>
-          <MySelect
+          <TagSelect
+            value={values.industries}
+            onChange={setFieldValue}
+            onBlur={setFieldTouched}
+            error={errors.industries}
+            options={industries}
+            touched={touched.industries}
+            name="industries"
+            title="Industry"
+          />
+          <TagSelect
             value={values.skills}
             onChange={setFieldValue}
             onBlur={setFieldTouched}
@@ -153,16 +166,6 @@ const EditProfileForm = () => {
             options={skills}
             touched={touched.skills}
             name="skills"
-            title="Industry"
-          />
-          <MySelect
-            value={values.competences}
-            onChange={setFieldValue}
-            onBlur={setFieldTouched}
-            error={errors.competences}
-            options={competences}
-            touched={touched.competences}
-            name="competences"
             title="Skills"
           />
           <Button color="primary" type="submit">Submit</Button>
@@ -172,7 +175,7 @@ const EditProfileForm = () => {
   );
 };
 
-class MySelect extends React.Component<any> {
+class TagSelect extends React.Component<any> {
   handleChange = (value: any) => {
     // this is going to call setFieldValue and manually update values.topcis
     this.props.onChange(this.props.name, value);

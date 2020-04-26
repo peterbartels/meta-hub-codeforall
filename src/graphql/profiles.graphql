@@ -1,0 +1,12 @@
+mutation CreateAProfile {
+   createProfile(data: {
+   alias: "Peter"
+   email: "peterbartels@gmail.com"
+   description: "test"
+   skills:["none"]
+   categories:["d"]
+   }) {
+       alias
+   }
+}
+
