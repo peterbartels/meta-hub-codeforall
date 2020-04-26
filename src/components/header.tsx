@@ -1,32 +1,19 @@
 import React, { useCallback, FunctionComponent } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import useTypewriter from 'react-use-typewriter'
 import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 
 import { useAuth0 } from "../auth/auth0";
 
 import {
-  Centered,
   NameContainer,
   Name,
   MenuContainer,
-  HeaderContainer,
-  Header,
   MenuItem,
-  Icons
 } from './styles'
 
 const HeaderComponent: FunctionComponent = () => {
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0() as any; //no typings for auth0 at the moment
-  const blah = useAuth0() as any
-
-  const typerWords = ["Hacking Corona", "An initiative by Dtuch Hack Health"]
-  const currentTyperWord = useTypewriter({
-    words: typerWords,
-    eraseSpeed: 50,
-    typeSpeed: 120,
-  })
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0() as any; //no typings for auth0 at the moment
 
   const dispatch = useDispatch()
 

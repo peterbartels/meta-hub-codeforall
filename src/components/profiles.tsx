@@ -1,11 +1,7 @@
-import React, { FormEvent, useCallback, useState, useEffect, FunctionComponent } from "react"
+import React, { useState, useEffect, FunctionComponent } from "react"
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux'
-import styled, { Box } from '@xstyled/styled-components'
-import { render } from "react-dom";
-import { withFormik, useFormik } from "formik";
-import * as Yup from "yup";
-import Select from "react-select";
+import { useSelector } from 'react-redux'
+import styled from '@xstyled/styled-components'
 import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
 import industries from '../data/competences'
@@ -14,7 +10,6 @@ import {
   Badge,
   Card,
   CardTitle,
-  CardSubTitle,
   CardHeader,
   CardBlock,
   CardText,
@@ -24,37 +19,13 @@ import {
   Row,
   Col,
   H1,
-  H3,
-  H5,
   H6,
-  Label,
   Input,
   InputGroup,
   InputGroupAddon,
 } from '@bootstrap-styled/v4';
 
-
-import {
-  LabelField,
-  InputField,
-  TextAreaField
-} from './formStyles'
-
-import {
-  MainContainer,
-  EditProfileContainer,
-  PrimaryButton,
-  NumberInput,
-  SmallHeader
-} from '../components/styles'
-
 import { State as ReduxState, Profile } from '../reducers';
-
-const BoxHeader = styled(Box)`
-  background: #606fc8;
-  color:white;
-  padding:5px;
-`
 
 interface ProfilesOverviewProps {
   profile: Profile
@@ -220,7 +191,7 @@ const ProfilesComponent: FunctionComponent = (props) => {
       setRandomUsers((profileData as any).profiles.concat(users));
     };
     fetchData();
-  }, []);
+  }, [profileData]);
 
   const handleClick = (profile: Profile) => (e: any) => {
     setCurrentProfile(profile)
@@ -275,10 +246,10 @@ const ProfilesComponent: FunctionComponent = (props) => {
 
         {randomUsers.map((profile: Profile, index: number) => {
           const randomSkill = Math.floor((Math.random() * 3) % 3)
-          profile.skills = profile.skills.length == 0 ? [skills[randomSkill]] : profile.skills
+          profile.skills = profile.skills.length === 0 ? [skills[randomSkill]] : profile.skills
           const randomCompetence = Math.floor((Math.random() * industries.length) % industries.length)
 
-          profile.competences = profile.competences.length == 0 ? [industries[randomCompetence]] : profile.competences
+          profile.competences = profile.competences.length === 0 ? [industries[randomCompetence]] : profile.competences
 
           return (<Col sm={{ size: 3 }} key={index}><ProfilesOverview profile={profile} handleClick={handleClick} /></Col>)
         })}

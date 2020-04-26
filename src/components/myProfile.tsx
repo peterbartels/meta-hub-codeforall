@@ -1,8 +1,6 @@
-import React, { FormEvent, useCallback, useState, FunctionComponent } from "react"
-import { useDispatch, useSelector } from 'react-redux'
-import styled, { Box } from '@xstyled/styled-components'
-import { render } from "react-dom";
-import { withFormik, useFormik } from "formik";
+import React, { useState, FunctionComponent } from "react"
+import { useDispatch } from 'react-redux'
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "react-select";
 import { Redirect } from "react-router-dom";
@@ -11,9 +9,6 @@ import {
   FormGroup,
   Label,
   Input,
-  InputGroup,
-  InputGroupAddon,
-  Option,
   Button,
 } from '@bootstrap-styled/v4';
 
@@ -22,18 +17,12 @@ import industries from '../data/competences'
 import skills from '../data/skills'
 import { useAuth0 } from "../auth/auth0";
 
-import { FormContainer, LabelField, InputField, TextAreaField } from './formStyles'
-import {
-  MainContainer,
-  EditProfileContainer,
-  PrimaryButton,
-  NumberInput,
-  SmallHeader
-} from '../components/styles'
+import { FormContainer, LabelField } from './formStyles'
+import { SmallHeader } from '../components/styles'
 
 const EditProfileForm = () => {
 
-  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0() as any;
+  const { user } = useAuth0() as any;
   const dispatch = useDispatch()
   const [submit, setSubmit] = useState(false)
 
@@ -73,15 +62,12 @@ const EditProfileForm = () => {
   const {
     values,
     touched,
-    dirty,
     errors,
     handleChange,
     handleBlur,
     handleSubmit,
-    handleReset,
     setFieldValue,
-    setFieldTouched,
-    isSubmitting
+    setFieldTouched
   } = formik;
 
   return (

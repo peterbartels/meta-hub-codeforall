@@ -7,18 +7,16 @@ import {
   Card,
   CardBlock,
   CardTitle,
-  CardSubtitle,
   CardText,
   Button,
   H1,
   H2,
-  Hr,
-  Jumbotron
+  Hr
 } from '@bootstrap-styled/v4';
 
 const Home: FunctionComponent = () => (
   <>
-    <img src="https://www.getvell.com/images/doctors_banner.jpg" width="100%" />
+    <img src="https://www.getvell.com/images/doctors_banner.jpg" width="100%" alt="" />
     <H2 color="secondary" style={{ marginTop: '30px', marginBottom: '30px' }}>We match governmental and health organisations with hackers to fight the worldwide COVID-19 pandemic</H2>
     <Hr />
     <Row style={{ marginTop: '30px', marginBottom: '30px' }}>

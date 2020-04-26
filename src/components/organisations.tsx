@@ -1,53 +1,13 @@
-import React, { FormEvent, useCallback, useState, useEffect, FunctionComponent } from "react"
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux'
-import styled, { Box } from '@xstyled/styled-components'
-import { render } from "react-dom";
-import { withFormik, useFormik } from "formik";
-import * as Yup from "yup";
-import Select from "react-select";
-import competences from '../data/competences'
-import skills from '../data/skills'
+import React, { FunctionComponent } from "react"
 import {
-  Badge,
-  Card,
-  CardTitle,
-  CardSubTitle,
-  CardHeader,
-  CardBlock,
-  CardText,
   Button,
-  Form,
-  FormGroup,
   Row,
   Col,
   Hr,
   H1,
-  H2,
   H3,
   H5,
-  H6,
-  Label,
-  Input,
-  InputGroup,
-  InputGroupAddon,
 } from '@bootstrap-styled/v4';
-
-
-import {
-  LabelField,
-  InputField,
-  TextAreaField
-} from './formStyles'
-
-import {
-  MainContainer,
-  EditProfileContainer,
-  PrimaryButton,
-  NumberInput,
-  SmallHeader
-} from '../components/styles'
-
 
 const Organisations: FunctionComponent = () => (
   <div style={{ textAlign: 'left' }}>
@@ -55,7 +15,7 @@ const Organisations: FunctionComponent = () => (
     <Hr />
     <Row style={{ marginTop: '30px', marginBottom: '30px' }}>
       <Col sm={{ size: 2 }}>
-        <img src="/images/nhg.jpg" height="40" />
+        <img alt="" src="/images/nhg.jpg" height="40" />
       </Col>
       <Col sm={{ size: 10 }}>
         <H3>Nederlands Huisartsen Genootschap</H3>
@@ -80,7 +40,7 @@ const Organisations: FunctionComponent = () => (
     <Hr />
     <Row style={{ marginTop: '30px', marginBottom: '30px' }}>
       <Col sm={{ size: 2 }}>
-        <img src="/images/nvic.jpg" height="40" />
+        <img alt="" src="/images/nvic.jpg" height="40" />
       </Col>
       <Col sm={{ size: 10 }}>
         <H3>Nederlandse Vereniging voor Intensive Care</H3>
@@ -106,7 +66,7 @@ const Organisations: FunctionComponent = () => (
     <Hr />
     <Row style={{ marginTop: '30px', marginBottom: '30px' }}>
       <Col sm={{ size: 2 }}>
-        <img src="/images/rivm.jpg" height="40" />
+        <img alt="" src="/images/rivm.jpg" height="40" />
       </Col>
       <Col sm={{ size: 10 }}>
         <H3>Rijksinstituut voor Volksgezondheid en Milieu (RIVM)</H3>
