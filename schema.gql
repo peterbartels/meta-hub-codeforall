@@ -1,0 +1,29 @@
+type Profile {
+  name: String
+  alias: String!
+  email: String!
+  linkedin: String
+  description: String!
+  skills: [String]!
+  industries: [String]!
+}
+
+type Query {
+  allProfiles: [Profile!]
+}
+
+input CreateProfileInput {
+  alias: String!,
+  description: String!,
+  email: String!,
+  skills: [String]!
+  industries: [String]
+}
+
+input UpdateProfileInput {
+  alias: String!,
+  description: String!,
+  email: String!,
+  skills: [String!]!
+  industries: [String]
+}

@@ -19,7 +19,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { createStore } from 'redux'
 import BootstrapProvider from '@bootstrap-styled/provider';
 import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from '@apollo/react-hooks';
 
 import config from './auth_config.json';
 import App from './App';

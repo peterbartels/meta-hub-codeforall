@@ -2,8 +2,9 @@ import React, { useState, FunctionComponent } from "react"
 import { useDispatch } from 'react-redux'
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Select from "react-select";
+import Select from "react-select/creatable";
 import { Redirect } from "react-router-dom";
+import { Profile } from '../reducers';
 import {
   Form,
   FormGroup,
@@ -11,20 +12,103 @@ import {
   Input,
   Button,
 } from '@bootstrap-styled/v4';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
 
 import api from '../utils/api'
-import industries from '../data/competences'
+import industries from '../data/industries'
 import skills from '../data/skills'
 import { useAuth0 } from "../auth/auth0";
 
 import { FormContainer, LabelField } from './formStyles'
 import { SmallHeader } from '../components/styles'
 
+/*
+   mutation PostMutation($description: String!, $url: String!) {
+   post(description: $description, url: $url) {
+   id
+   createdAt
+   url
+   description
+   }
+
+   mutation CreateAProfile(
+   $alias: String!, 
+   $description: String!, 
+   $email: String!,
+   $skills: [String!]!
+   $categories: [String] 
+   ){
+   createProfile(
+   $alias: String!, 
+   $description: String!, 
+   $email: String!,
+   $skills: [String!]!
+   $categories: [String]
+   ){
+   id
+   alias
+   email
+   description
+   skills
+   categories
+   }
+   }
+   }*/
+
+const ADD_PROFILE = gql`
+  input Tag {
+    value: String!
+    label: String!
+  }
+  
+  mutation CreateAProfile(
+    $alias: String!, 
+    $description: String!, 
+    $email: String!,
+    $skills: [Tag]!
+    $categories: [Tag]
+  ) {
+    createProfile(
+      alias: $alias,
+      description: $description,
+      email: $email,
+      skills: $skills,
+      categories: $categories
+    ) {
+      alias
+    }
+  }
+`;
+
+type SelectOption = {
+  value: string,
+  label: string
+}
+
+const ArrayToSelectOptions = (arr: ReadonlyArray<string>) =>
+  arr
+    .map((item: string): SelectOption =>
+      ({
+        value: item,
+        label: item
+      }))
+
 const EditProfileForm = () => {
 
   const { user } = useAuth0() as any;
   const dispatch = useDispatch()
   const [submit, setSubmit] = useState(false)
+  const [addProfile,] = useMutation(ADD_PROFILE);
+
+  const inititialValues = {
+    alias: '',
+    linkedin: '',
+    email: '',
+    skills: [],
+    industries: [],
+    description: '',
+  }
 
   const formik = useFormik({
     validationSchema: Yup.object().shape({
@@ -39,23 +123,23 @@ const EditProfileForm = () => {
           })
         )
     }),
-    initialValues: {
-      alias: '',
-      linkedin: '',
-      email: '',
-      skills: [],
-      industries: [],
-      description: '',
-      category: '',
-    },
+    initialValues: inititialValues,
     onSubmit: profile => {
-      // Make API request to create new profile
-      api.create(values).then((response: any) => {
-        dispatch({ type: "UPDATE_PROFILE", payload: values })
-        setSubmit(true)
-      }).catch((e: any) => {
-        console.log('An API error occurred', e)
-      })
+
+      const profileValues = {
+        ...values,
+        skills: values.skills.map((s: SelectOption) => s.value),
+        industries: values.industries.map((i: SelectOption) => i.value),
+      }
+
+      addProfile({ variables: profileValues });
+      setSubmit(true)
+      /*
+         api.create(values).then((response: any) => {
+         dispatch({ type: "UPDATE_PROFILE", payload: values })
+         }).catch((e: any) => {
+         console.log('An API error occurred', e)
+         })*/
     },
   });
 
@@ -139,24 +223,24 @@ const EditProfileForm = () => {
             onChange={setFieldValue}
             onBlur={setFieldTouched}
             error={errors.industries}
-            options={industries}
+            options={ArrayToSelectOptions(industries)}
             touched={touched.industries}
             name="industries"
-            title="Industry"
+            title="Industries"
           />
           <TagSelect
             value={values.skills}
             onChange={setFieldValue}
             onBlur={setFieldTouched}
             error={errors.skills}
-            options={skills}
+            options={ArrayToSelectOptions(skills)}
             touched={touched.skills}
             name="skills"
             title="Skills"
           />
           <Button color="primary" type="submit">Submit</Button>
         </Form>
-      </FormContainer >
+      </FormContainer>
     </>
   );
 };

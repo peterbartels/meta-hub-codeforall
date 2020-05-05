@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import styled from '@xstyled/styled-components'
 import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
-import industries from '../data/competences'
+import industries from '../data/industries'
 import skills from '../data/skills'
 import {
   Badge,
@@ -84,15 +84,15 @@ const ProfileCardDescription = styled.div`
 const ProfilesOverview: FunctionComponent<any> = (props) => {
 
   const { profile, handleClick } = props
-  const industries = (profile.competences || profile.industries || []).map((s: any, index: number) => {
+  const industries = (profile.industries || []).map((industry: String, index: number) => {
     return (
-      <span key={index} style={{ display: 'inline' }}> <Badge>{s.label}</Badge></span>
+      <span key={index} style={{ display: 'inline' }}> <Badge>{industry}</Badge></span>
     )
   })
 
-  const skills = profile.skills.map((s: any, index: number) => {
+  const skills = profile.skills.map((skill: String, index: number) => {
     return (
-      <span key={index} style={{ display: 'inline' }}> <Badge color="primary">{s.label}</Badge></span>
+      <span key={index} style={{ display: 'inline' }}> <Badge color="primary">{skill}</Badge></span>
     )
   })
 
@@ -116,15 +116,15 @@ const ProfilesOverview: FunctionComponent<any> = (props) => {
 
 const ProfileView: FunctionComponent<{ profile: Profile }> = (props) => {
   const { profile } = props
-  const skills = profile.skills.map((s: any, index: number) => {
+  const skills = profile.skills.map((skill: any, index: number) => {
     return (
-      <H6 key={index} style={{ display: 'inline' }}> <Badge>{s.label}</Badge></H6>
+      <H6 key={index} style={{ display: 'inline' }}> <Badge>{skill}</Badge></H6>
     )
   })
 
-  const competences = (profile.competences || []).map((s: any, index: number) => {
+  const industries = (profile.industries || []).map((industry: any, index: number) => {
     return (
-      <H6 key={index} style={{ display: 'inline' }}> <Badge color="primary">{s.label}</Badge></H6>
+      <H6 key={index} style={{ display: 'inline' }}> <Badge color="primary">{industry}</Badge></H6>
     )
   })
 
@@ -150,13 +150,13 @@ const ProfileView: FunctionComponent<{ profile: Profile }> = (props) => {
           Industry
         </Col>
         <Col xs={{ size: 10 }}>
-          {skills}
+          {industries}
         </Col>
         <Col xs={{ size: 2 }}>
           Skills
         </Col>
         <Col xs={{ size: 10 }}>
-          {competences}
+          {skills}
         </Col>
       </Row>
     </div >
@@ -176,7 +176,7 @@ const ProfilesComponent: FunctionComponent = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        'https://randomuser.me/api/?results=20',
+        'https://randomuser.me/api/?results=2',
       );
 
       const users: any = result.data.results.map((p: any): any => ({
@@ -184,7 +184,7 @@ const ProfilesComponent: FunctionComponent = (props) => {
         description: loremIpsum,
         linkedin: 'https://www.linkedin.com/in/peterbartels',
         skills: [],
-        competences: [],
+        industries: [],
         email: p.email,
         picture: p.picture.medium
       }))
@@ -228,7 +228,7 @@ const ProfilesComponent: FunctionComponent = (props) => {
                 linkedin
                 description
                 skills
-                categories
+                industries
               }
             }
           `}
@@ -249,7 +249,7 @@ const ProfilesComponent: FunctionComponent = (props) => {
           profile.skills = profile.skills.length === 0 ? [skills[randomSkill]] : profile.skills
           const randomCompetence = Math.floor((Math.random() * industries.length) % industries.length)
 
-          profile.competences = profile.competences.length === 0 ? [industries[randomCompetence]] : profile.competences
+          profile.industries = profile.industries.length === 0 ? [industries[randomCompetence]] : profile.industries
 
           return (<Col sm={{ size: 3 }} key={index}><ProfilesOverview profile={profile} handleClick={handleClick} /></Col>)
         })}

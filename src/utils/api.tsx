@@ -1,7 +1,7 @@
 /* Api methods to call /functions */
 
 const create = (data: any) => {
-  return fetch('/.netlify/functions/profiles-create', {
+  return fetch('/.netlify/functions/graphql', {
     body: JSON.stringify(data),
     method: 'POST'
   }).then(response => {

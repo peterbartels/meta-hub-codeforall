@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.5",
     "@auth0/auth0-spa-js": "^1.7.0",
     "@bootstrap-styled/provider": "^2.0.2",
     "@bootstrap-styled/v4": "^3.4.0",
@@ -21,6 +22,7 @@
     "formik": "^2.1.4",
     "graphql": "^15.0.0",
     "graphql-request": "^1.8.2",
+    "graphql-tag": "^2.10.3",
     "react": "^16.13.0",
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.0",
