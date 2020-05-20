@@ -20,5 +20,10 @@
         "organizer": "Organisator",
         "developer": "Ontwikkelaar",
         "general": "Participant"
+    },
+    "footer": {
+        "privacy": "Privacy",
+        "sponsors": "Sponsors",
+        "about": "Dit platform is het resultaat van onze teaminspanning op de Hack Corona hackathon, gehost van 27-31 maart 2020 door Dutch Hacking Health."
     }
 }

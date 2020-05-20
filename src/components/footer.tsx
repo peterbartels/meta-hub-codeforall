@@ -1,18 +1,21 @@
 import React, { FunctionComponent } from "react"
-
+import { useTranslation } from "react-i18next";
+import i18n from '../i18n';
 import {
   FooterContainer,
   Footer
 } from '../components/styles'
 
 const FooterComponent: FunctionComponent = () => {
-
+  const { t } = useTranslation('translations', { i18n });
   return (
     <FooterContainer>
       <Footer>
-        Privacy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sponsors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This platform is the result of our teameffort at de Hack Corona hackaton hosted from 27-31 march 2020 by Dutch Hacking Health.
+        <span>{t('footer.privacy')}</span>
+        <span>{t('footer.sponsors')}</span>
+        <span>{t('footer.about')}</span>
       </Footer>
-    </FooterContainer >
+    </FooterContainer>
   )
 }
 

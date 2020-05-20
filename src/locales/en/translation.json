@@ -20,5 +20,10 @@
         "organizer": "Organizer",
         "developer": "Development",
         "general": "Participant"
+    },
+    "footer": {
+        "privacy": "Privacy",
+        "sponsors": "Sponsors",
+        "about": "This platform is the result of our teameffort at de Hack Corona hackaton hosted from 27-31 march 2020 by Dutch Hacking Health."
     }
 }
