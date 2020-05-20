@@ -1,0 +1,53 @@
+{
+    "general": {
+        "organisation": "Organisation",
+        "organisations": "Organisations",
+        "person": "Hacker",
+        "people": "Hackers"
+    },
+    "buttons": {
+        "back": "Back"
+    },
+    "search": {
+        "placeholder": "Search for alias, skills, competences"
+    },
+    "header": {
+        "title": "Health Hacker Hub",
+        "home": "Home",
+        "profile": "My Profile",
+        "login": "Login",
+        "logout": "Logout"
+    },
+    "home": {
+        "welcome": "We match governmental and health organisations with hackers to fight the worldwide COVID-19 pandemic",
+        "organisations": {
+            "description":"Can search for skills and availability amongst hackers and reach out to them to ask their help.",
+            "button":"Search now"
+        },
+        "people": {
+            "description":"Can help by adding a personal profile including skills and when available to join the fight.",
+            "button":"Add me"
+        },
+        "future": {
+            "title": "Future",
+            "description":"Connecting hackers affiliated to nation based health(tech) hackatons on a global scale.",
+            "button":"Read more"
+        },
+        "contributors": "Contributors",
+        "organizer": "Organizer",
+        "developer": "Development",
+        "general": "Participant"
+    },
+    "footer": {
+        "privacy": "Privacy",
+        "sponsors": "Sponsors",
+        "about": "This platform is the result of our teameffort at de Hack Corona hackaton hosted from 27-31 march 2020 by Dutch Hacking Health."
+    },
+    "profile": {
+        "full": "Full profile",
+        "description": "Description",
+        "linkedin": "LinkedIn",
+        "industry": "Industry",
+        "skills": "Skills"
+    }
+}

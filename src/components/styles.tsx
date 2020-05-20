@@ -118,9 +118,18 @@ export const Footer = styled(Centered)`
   padding: 40px;
   font-family: 'Sen';
   box-shadow:0px 9px 7px -5px #fff;
+  display: flex;
+  flex-direction: row;
+  span {                                                                                                                                                                                                                                                                      
+    padding: 0 3em 0 3em;
+    border-right: 2px solid #fff;
+    &:last-child {
+      border-right: 0px;
+    }
+  }
 `
 
-export const EditProfileContainer = styled.div`
+export const EditProfileContainer = styled.div`                                                       
   display: flex;
   flex-direction: column;
   align-items: center;

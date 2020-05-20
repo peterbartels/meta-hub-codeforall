@@ -99,3 +99,7 @@ body > #root > div > div, body > #root > div {
   display:flex;
   flex-direction:column;
 }
+
+.card-title {
+  text-transform: uppercase;
+}
