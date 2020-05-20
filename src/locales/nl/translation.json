@@ -1,0 +1,24 @@
+{
+    "home": {
+        "welcome": "We matchen overheids- en gezondheidsorganisaties met hackers om de wereldwijde COVID-19-pandemie te bestrijden",
+        "organisations": {
+            "title": "Organisaties",
+            "description":"Kan zoeken naar vaardigheden en beschikbaarheid onder hackers en contact met hen opnemen om hun hulp te vragen.",
+            "button":"Zoeken"
+        },
+        "people": {
+            "title": "Hackers",
+            "description":"Kan zoeken naar vaardigheden en beschikbaarheid onder hackers en contact met hen opnemen om hun hulp te vragen.",
+            "button":"Meedoen"
+        },
+        "future": {
+            "title": "Toekomst",
+            "description":"Het verbinden van hackers die zijn aangesloten bij nationale (technische) hackatons op wereldwijde schaal.",
+            "button":"Lees meer"
+        },
+        "contributors": "Gemaakt door",
+        "organizer": "Organisator",
+        "developer": "Ontwikkelaar",
+        "general": "Participant"
+    }
+}
