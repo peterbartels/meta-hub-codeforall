@@ -11,7 +11,7 @@ i18n
 .use(initReactI18next)
 .init({
     debug: true,
-    lng: "nl",
+    lng: "en",
     fallbackLng: "en",
     saveMissing: true,
     interpolation: {
