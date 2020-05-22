@@ -1,13 +1,30 @@
 {
+    "general": {
+        "organisation": "Organisatie",
+        "organisations": "Organisaties",
+        "person": "Hacker",
+        "people": "Hackers"
+    },
+    "buttons": {
+        "back": "Terug"
+    },
+    "search": {
+        "placeholder": "Zoek op naam, specialisatie of competentie"
+    },
+    "header": {
+        "title": "Health Hacker Hub",
+        "home": "Home",
+        "profile": "Mijn Profiel",
+        "login": "Aanmelden",
+        "logout": "Afmelden"
+    },
     "home": {
         "welcome": "We matchen overheids- en gezondheidsorganisaties met hackers om de wereldwijde COVID-19-pandemie te bestrijden",
         "organisations": {
-            "title": "Organisaties",
             "description":"Kan zoeken naar vaardigheden en beschikbaarheid onder hackers en contact met hen opnemen om hun hulp te vragen.",
             "button":"Zoeken"
         },
         "people": {
-            "title": "Hackers",
             "description":"Kan zoeken naar vaardigheden en beschikbaarheid onder hackers en contact met hen opnemen om hun hulp te vragen.",
             "button":"Meedoen"
         },
@@ -25,5 +42,12 @@
         "privacy": "Privacy",
         "sponsors": "Sponsors",
         "about": "Dit platform is het resultaat van onze teaminspanning op de Hack Corona hackathon, gehost van 27-31 maart 2020 door Dutch Hacking Health."
+    },
+    "profile": {
+        "full": "Volledig profiel",
+        "description": "Beschrijving",
+        "linkedin": "LinkedIn",
+        "industry": "Vakgebied",
+        "skills": "Specialisatie"
     }
 }

@@ -1,4 +1,6 @@
 import React, { useCallback, FunctionComponent } from "react"
+import { useTranslation } from "react-i18next";
+import i18n from '../i18n';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
@@ -14,7 +16,7 @@ import {
 
 const HeaderComponent: FunctionComponent = () => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0() as any; //no typings for auth0 at the moment
-
+  const { t } = useTranslation('translations', { i18n });
   const dispatch = useDispatch()
 
   const dispatchStartAddProfile = useCallback(
@@ -30,46 +32,46 @@ const HeaderComponent: FunctionComponent = () => {
   return (<>
     <NameContainer>
       <Name>
-        <FontAwesomeIcon icon="heart" size="2x" color="#0289C8" /><span>Health Hacker Hub</span>
+        <FontAwesomeIcon icon="heart" size="2x" color="#0289C8" /><span>{t('header.title')}</span>
       </Name>
 
       <MenuContainer>
         <Link to="/home">
           <MenuItem onClick={dispatchStartAddProfile}>
             <FontAwesomeIcon icon="home" size="2x" color="#0289C8" />
-            <span>Home</span>
+              <span>{t('header.home')}</span>
           </MenuItem>
         </Link>
         {isAuthenticated && (
           <Link to="/my-profile">
             <MenuItem onClick={dispatchStartAddProfile}>
               <FontAwesomeIcon icon="user" size="2x" color="#0289C8" />
-              <span>My Profile</span>
+              <span>{t('header.profile')}</span>
             </MenuItem>
           </Link>
         )}
         <Link to="/profiles">
           <MenuItem onClick={dispatchStartAddProfile}>
             <FontAwesomeIcon icon="user-cog" size="2x" color="#0289C8" />
-            <span>Hackers</span>
+            <span>{t('general.people')}</span>
           </MenuItem>
         </Link>
         <Link to="/organisations">
           <MenuItem>
             <FontAwesomeIcon icon="building" size="2x" color="#0289C8" />
-            <span>Organisations</span>
+            <span>{t('general.organisations')}</span>
           </MenuItem>
         </Link>
         {!isAuthenticated && (
           <MenuItem onClick={() => loginWithRedirect({})}>
             <FontAwesomeIcon icon="user-cog" size="2x" color="#0289C8" />
-            <span>Login</span>
+        <span>{t('header.login')}</span>
           </MenuItem>
         )}
         {isAuthenticated && (
           <MenuItem onClick={() => logoutWithRedirect()}>
             <FontAwesomeIcon icon="user-cog" size="2x" color="#0289C8" />
-            <span>Logout</span>
+            <span>{t('header.logout')}</span>
           </MenuItem>
         )}
       </MenuContainer>

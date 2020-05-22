@@ -1,4 +1,6 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
+import { useTranslation } from "react-i18next";
+import i18n from '../i18n';
 import axios from 'axios';
 import { useSelector } from 'react-redux'
 import styled from '@xstyled/styled-components'
@@ -82,7 +84,7 @@ const ProfileCardDescription = styled.div`
 
 
 const ProfilesOverview: FunctionComponent<any> = (props) => {
-
+  const { t } = useTranslation('translations', { i18n });
   const { profile, handleClick } = props
   const industries = (profile.competences || profile.industries || []).map((s: any, index: number) => {
     return (
@@ -108,13 +110,14 @@ const ProfilesOverview: FunctionComponent<any> = (props) => {
           {industries} {skills}
         </CardText>
 
-        <Button color="secondary" onClick={handleClick(profile)}>Full profile</Button>
+  <Button color="secondary" onClick={handleClick(profile)}>{t('profile.full')}</Button>
       </CardBlock>
     </ProfileCard>
   )
 }
 
 const ProfileView: FunctionComponent<{ profile: Profile }> = (props) => {
+  const { t } = useTranslation('translations', { i18n });
   const { profile } = props
   const skills = profile.skills.map((s: any, index: number) => {
     return (
@@ -130,30 +133,30 @@ const ProfileView: FunctionComponent<{ profile: Profile }> = (props) => {
 
   return (
     <div style={{ textAlign: 'left' }}>
-      <Button color="secondary">Back</Button>
+      <Button color="secondary">{t('buttons.back')}</Button>
       <H1 style={{ marginTop: '20px' }}>{profile.alias}</H1>
       <Row style={{ marginTop: '20px' }}>
         <Col xs={{ size: 2 }}>
-          Description
+          {t('profile.description')}
         </Col>
         <Col xs={{ size: 10 }}>
           {profile.description}
         </Col>
         <Col xs={{ size: 2 }}>
-          LinkedIn
+        {t('profile.linkedin')}
         </Col>
         <Col xs={{ size: 10 }}>
           {profile.linkedin}
         </Col>
 
         <Col xs={{ size: 2 }}>
-          Industry
+        {t('profile.industry')}
         </Col>
         <Col xs={{ size: 10 }}>
           {skills}
         </Col>
         <Col xs={{ size: 2 }}>
-          Skills
+        {t('profile.skills')}
         </Col>
         <Col xs={{ size: 10 }}>
           {competences}
@@ -168,6 +171,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 `
 
 const ProfilesComponent: FunctionComponent = (props) => {
+  const { t } = useTranslation('translations', { i18n });
   const [randomUsers, setRandomUsers] = useState([]);
   const [currentProfile, setCurrentProfile] = useState<any>();
   //const dispatch = useDispatch()
@@ -212,7 +216,7 @@ const ProfilesComponent: FunctionComponent = (props) => {
           <FormGroup>
             <InputGroup>
               <InputGroupAddon>@</InputGroupAddon>
-              <Input id="alias" placeholder="Search for alias, skills, competences" type="alias" style={{ width: '400px' }} />
+              <Input id="alias" placeholder={t('search.placeholder')} type="alias" style={{ width: '400px' }} />
             </InputGroup>
           </FormGroup>
         </Form>

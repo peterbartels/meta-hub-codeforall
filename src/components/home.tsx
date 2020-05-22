@@ -28,7 +28,7 @@ const Home: FunctionComponent = () => {
             <CardBlock>
               <FontAwesomeIcon icon="building" size="5x" color="#0289C8" />
               <Hr />
-              <CardTitle>{t('home.organisations.title')}</CardTitle>
+              <CardTitle>{t('general.organisations')}</CardTitle>
               <CardText>{t('home.organisations.description')}</CardText>
               <Button color="primary">{t('home.organisations.button')}</Button>
             </CardBlock>
@@ -39,7 +39,7 @@ const Home: FunctionComponent = () => {
             <CardBlock>
               <FontAwesomeIcon icon="user-cog" size="5x" color="#0289C8" />
               <Hr />
-              <CardTitle>{t('home.people.title')}</CardTitle>
+              <CardTitle>{t('general.people')}</CardTitle>
               <CardText>{t('home.people.description')}</CardText>
               <Button color="primary">{t('home.people.button')}</Button>
             </CardBlock>
