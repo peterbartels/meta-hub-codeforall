@@ -212,14 +212,16 @@ const ProfilesComponent: FunctionComponent = (props) => {
   return currentProfile ? <ProfileView profile={currentProfile} /> : (
     <>
       <Row>
-        <Form>
-          <FormGroup>
-            <InputGroup>
-              <InputGroupAddon>@</InputGroupAddon>
-              <Input id="alias" placeholder={t('search.placeholder')} type="alias" style={{ width: '400px' }} />
-            </InputGroup>
-          </FormGroup>
-        </Form>
+        <Col>
+          <Form>
+            <FormGroup>
+              <InputGroup>
+                <InputGroupAddon>@</InputGroupAddon>
+                <Input id="alias" placeholder={t('search.placeholder')} type="alias" />
+              </InputGroup>
+            </FormGroup>
+          </Form>
+        </Col>
       </Row>
 
       <Row>
