@@ -103,3 +103,16 @@ body > #root > div > div, body > #root > div {
 .card-title {
   text-transform: uppercase;
 }
+.navbar-brand div{
+  display: inline;
+  padding: 0 1em 0 .5em;
+}
+.nav-link div{
+  display: inline;
+  padding: 0 1em 0 .5em;
+  cursor: pointer;
+}
+
+.nav-item {
+  text-align: left;
+}
