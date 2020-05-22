@@ -1,8 +1,8 @@
-import React, { useState, FunctionComponent } from "react"
+import React, { useEffect, useState, FunctionComponent } from "react"
 import { useDispatch } from 'react-redux'
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Select from "react-select";
+import Select from "react-select/creatable";
 import { Redirect } from "react-router-dom";
 import {
   Form,
@@ -11,20 +11,60 @@ import {
   Input,
   Button,
 } from '@bootstrap-styled/v4';
-
+import { Profile } from '../reducers';
 import api from '../utils/api'
-import industries from '../data/competences'
+import industries from '../data/industries'
 import skills from '../data/skills'
 import { useAuth0 } from "../auth/auth0";
 
 import { FormContainer, LabelField } from './formStyles'
 import { SmallHeader } from '../components/styles'
 
+type SelectOption = {
+  value: string,
+  label: string
+}
+
+const ArrayToSelectOptions = (arr: ReadonlyArray<string>) =>
+  arr
+    .map((item: string): SelectOption =>
+      ({
+        value: item,
+        label: item
+      }))
+
+
 const EditProfileForm = () => {
 
   const { user } = useAuth0() as any;
   const dispatch = useDispatch()
   const [submit, setSubmit] = useState(false)
+
+  useEffect(() => {
+    (async () => {
+      const data = await api.getUser(user.email) as any
+      //console.log(data)
+      setUserData(data)
+    })()
+  }, [user.email]);
+
+  const initialValues = {
+    alias: '',
+    linkedin: '',
+    email: '',
+    skills: [],
+    industries: [],
+    description: '',
+  }
+
+  const [userData, setUserData] = useState<Profile>(initialValues);
+
+  //TODO replace touched with loadig auth0 and db values
+  const initialProfile: Profile = userData && userData.alias ? {
+    ...userData,
+    skills: ArrayToSelectOptions(userData.skills),
+    industries: ArrayToSelectOptions(userData.industries)
+  } : initialValues
 
   const formik = useFormik({
     validationSchema: Yup.object().shape({
@@ -39,19 +79,26 @@ const EditProfileForm = () => {
           })
         )
     }),
-    initialValues: {
-      alias: '',
-      linkedin: '',
-      email: '',
-      skills: [],
-      industries: [],
-      description: '',
-      category: '',
-    },
+    enableReinitialize: true,
+    initialValues: initialProfile,
     onSubmit: profile => {
       // Make API request to create new profile
-      api.create(values).then((response: any) => {
-        dispatch({ type: "UPDATE_PROFILE", payload: values })
+      const profileValues = {
+        ...values,
+        email: user.email,
+        skills: (values.skills as any).map((s: SelectOption) => s.value),
+        industries: (values.industries as any).map((i: SelectOption) => i.value),
+      }
+
+      console.log(userData)
+
+      const action = userData && userData.alias ? 'updateUser' : 'createUser'
+
+      api[action](profileValues, user.email).then((response: any) => {
+        //TODO: add check if we want to
+        //update the redux state: dispatch({ type: "UPDATE_PROFILE", payload: profileValues })
+
+        //Set submit to true to redirect to profiles view
         setSubmit(true)
       }).catch((e: any) => {
         console.log('An API error occurred', e)
@@ -105,9 +152,6 @@ const EditProfileForm = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {errors.email && touched.email && (
-              <div style={{ color: "red", marginTop: ".5rem" }}>{errors.email}</div>
-            )}
           </FormGroup>
           <FormGroup>
             <LabelField htmlFor="LinkedIn" style={{ display: "block" }}>
@@ -130,6 +174,7 @@ const EditProfileForm = () => {
               id="description"
               rows={15}
               cols={40}
+              value={values.description}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -139,7 +184,7 @@ const EditProfileForm = () => {
             onChange={setFieldValue}
             onBlur={setFieldTouched}
             error={errors.industries}
-            options={industries}
+            options={ArrayToSelectOptions(industries)}
             touched={touched.industries}
             name="industries"
             title="Industry"
@@ -149,14 +194,14 @@ const EditProfileForm = () => {
             onChange={setFieldValue}
             onBlur={setFieldTouched}
             error={errors.skills}
-            options={skills}
+            options={ArrayToSelectOptions(skills)}
             touched={touched.skills}
             name="skills"
             title="Skills"
           />
           <Button color="primary" type="submit">Submit</Button>
         </Form>
-      </FormContainer >
+      </FormContainer>
     </>
   );
 };

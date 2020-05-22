@@ -18,8 +18,6 @@ import {
 import { Provider as ReduxProvider } from 'react-redux'
 import { createStore } from 'redux'
 import BootstrapProvider from '@bootstrap-styled/provider';
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
 
 import config from './auth_config.json';
 import App from './App';
@@ -28,9 +26,6 @@ import { Auth0Provider } from "./auth/auth0";
 import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory()
-const client = new ApolloClient({
-  uri: "/.netlify/functions/graphql"
-});
 
 const onRedirectCallback = (appState: any) => {
   history.push(
@@ -81,9 +76,7 @@ const AppProvider: FunctionComponent = ({ children }) => {
           <BootstrapProvider theme={{
             '$btn-primary-bg': '#0289C8'
           }}>
-            <ApolloProvider client={client}>
-              <App />
-            </ApolloProvider>
+            <App />
           </BootstrapProvider>
         </ThemeProvider>
       </ReduxProvider>

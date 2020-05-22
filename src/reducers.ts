@@ -1,13 +1,11 @@
 export interface Profile {
   alias: string,
-  name: string,
-  contact: string,
   email: string,
   description: string
   linkedin: string
   skills: any
-  competences?: any
-  avatar: string
+  industries: any
+  avatar?: string
   picture?: string
 }
 

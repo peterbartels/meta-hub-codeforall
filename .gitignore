@@ -24,3 +24,6 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+functions/serviceAccountKey.json
+functions/serviceAccountKey.js
+.env
