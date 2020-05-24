@@ -1,5 +1,4 @@
 require('dotenv').config()
-console.log('qqqqqqqqqqqqqqqq', process.env.FIRESTORE_CLIENT_EMAIL)
 
 const admin = require('firebase-admin');
 const serviceAccount = require("./serviceAccountKey.js");
