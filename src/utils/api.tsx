@@ -1,52 +1,56 @@
-/* Api methods to call /functions */
+/* Api methods to call AWS functions */
+import axios from "axios";
 
-const create = (data: any) => {
-  return fetch('/.netlify/functions/profiles-create', {
-    body: JSON.stringify(data),
-    method: 'POST'
-  }).then(response => {
-    return response.json()
-  })
+const ax = axios.create({
+  baseURL: "/.netlify/functions/api/",
+  responseType: "json"
+});
+
+const createUser = async (data: any) => {
+  try {
+    const response = await ax.post('/users', data);
+  } catch (e) {
+    console.log(`Posting user data failed: ${e}`);
+  }
 }
 
-const readAll = () => {
-  return fetch('/.netlify/functions/profiles-read-all').then((response) => {
-    return response.json()
-  })
+const getAllUsers = async () => {
+  try {
+    return (await ax.get('/users')).data;
+  } catch (e) {
+    console.log(`Getting user data failed: ${e}`);
+  }
 }
 
-const update = (profileId: any, data: any) => {
-  return fetch(`/.netlify/functions/profiles-update/${profileId}`, {
-    body: JSON.stringify(data),
-    method: 'POST'
-  }).then(response => {
-    return response.json()
-  })
+const getUser = async (email: string) => {
+  try {
+    const response = await ax.get('/account/me', { params: { email } });
+    return response.data
+  } catch (e) {
+    console.log(`Getting user data failed: ${e}`);
+  }
 }
 
-const deleteProfile = (profileId: any) => {
-  return fetch(`/.netlify/functions/profiles-delete/${profileId}`, {
-    method: 'POST',
-  }).then(response => {
-    return response.json()
-  })
+const updateUser = async (data: any, email?: string) => {
+  try {
+    const response = await ax.put('/users', data, { params: { email } });
+  } catch (e) {
+    console.log(`Posting user data failed: ${e}`);
+  }
 }
 
-const batchDeleteProfile = (profileIds: any) => {
-  return fetch(`/.netlify/functions/profiles-delete-batch`, {
-    body: JSON.stringify({
-      ids: profileIds
-    }),
-    method: 'POST'
-  }).then(response => {
-    return response.json()
-  })
+const deleteUser = async (email?: string) => {
+  try {
+    return await ax.delete('/users', { params: { email } });
+  } catch (e) {
+    console.log(`Deleting user data failed: ${e}`);
+  }
 }
 
 export default {
-  create: create,
-  readAll: readAll,
-  update: update,
-  delete: deleteProfile,
-  batchDelete: batchDeleteProfile
+  getUser,
+  createUser,
+  getAllUsers,
+  updateUser,
+  deleteUser,
 }

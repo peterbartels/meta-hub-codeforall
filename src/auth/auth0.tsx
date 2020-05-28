@@ -61,7 +61,6 @@ export const Auth0Provider = ({
   };
 
   const handleRedirectCallback = async () => {
-    console.log('qqq')
     setLoading(true);
     await auth0Client.handleRedirectCallback();
     const user = await auth0Client.getUser();

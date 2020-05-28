@@ -1,13 +1,9 @@
 import React, { useState, useEffect, FunctionComponent } from "react"
 import { useTranslation } from "react-i18next";
-import i18n from '../i18n';
-import axios from 'axios';
 import { useSelector } from 'react-redux'
 import styled from '@xstyled/styled-components'
-import { gql } from "apollo-boost";
-import { Query } from "react-apollo";
-import industries from '../data/competences'
-import skills from '../data/skills'
+import md5 from 'blueimp-md5'
+import Identicon from 'identicon.js'
 import {
   Badge,
   Card,
@@ -26,6 +22,10 @@ import {
   InputGroup,
   InputGroupAddon,
 } from '@bootstrap-styled/v4';
+
+import i18n from '../i18n';
+import api from '../utils/api'
+import { useAuth0 } from "../auth/auth0";
 
 import { State as ReduxState, Profile } from '../reducers';
 
@@ -82,25 +82,34 @@ const ProfileCardDescription = styled.div`
   word-break: break-all;
 `
 
-
 const ProfilesOverview: FunctionComponent<any> = (props) => {
   const { t } = useTranslation('translations', { i18n });
   const { profile, handleClick } = props
-  const industries = (profile.competences || profile.industries || []).map((s: any, index: number) => {
+  const industries = (profile.industries || []).map((industry: String, index: number) => {
     return (
-      <span key={index} style={{ display: 'inline' }}> <Badge>{s.label}</Badge></span>
+      <span key={index} style={{ display: 'inline' }}> <Badge>{industry}</Badge></span>
     )
   })
 
-  const skills = profile.skills.map((s: any, index: number) => {
+  const skills = profile.skills.map((skill: String, index: number) => {
     return (
-      <span key={index} style={{ display: 'inline' }}> <Badge color="primary">{s.label}</Badge></span>
+      <span key={index} style={{ display: 'inline' }}> <Badge color="primary">{skill}</Badge></span>
     )
   })
+
+  //TODO move to the backend and generate it when profile is created to improve performance
+  const options = {
+    margin: 0.2,                              // 20% margin
+    size: 100,                                // 420px square
+    format: 'svg'                             // use SVG instead of PNG
+  };
+  var avatarSvg = new Identicon(md5(profile.alias), options).toString();
 
   return (
     <ProfileCard className="text-center">
-      <ProfileCardHeader><Avatar image={profile.picture} /></ProfileCardHeader>
+      <ProfileCardHeader>
+        <img width="100" height="100" src={`data:image/svg+xml;base64,${avatarSvg}`} alt="avatar" />
+      </ProfileCardHeader>
       <CardBlock>
         <ProfileTitle>{profile.alias}</ProfileTitle>
         <ProfileCardDescription>{profile.description}</ProfileCardDescription>
@@ -110,7 +119,7 @@ const ProfilesOverview: FunctionComponent<any> = (props) => {
           {industries} {skills}
         </CardText>
 
-  <Button color="secondary" onClick={handleClick(profile)}>{t('profile.full')}</Button>
+        <Button color="secondary" onClick={handleClick(profile)}>{t('profile.full')}</Button>
       </CardBlock>
     </ProfileCard>
   )
@@ -119,15 +128,15 @@ const ProfilesOverview: FunctionComponent<any> = (props) => {
 const ProfileView: FunctionComponent<{ profile: Profile }> = (props) => {
   const { t } = useTranslation('translations', { i18n });
   const { profile } = props
-  const skills = profile.skills.map((s: any, index: number) => {
+  const skills = profile.skills.map((skill: any, index: number) => {
     return (
-      <H6 key={index} style={{ display: 'inline' }}> <Badge>{s.label}</Badge></H6>
+      <H6 key={index} style={{ display: 'inline' }}> <Badge>{skill}</Badge></H6>
     )
   })
 
-  const competences = (profile.competences || []).map((s: any, index: number) => {
+  const industries = (profile.industries || []).map((industry: any, index: number) => {
     return (
-      <H6 key={index} style={{ display: 'inline' }}> <Badge color="primary">{s.label}</Badge></H6>
+      <H6 key={index} style={{ display: 'inline' }}> <Badge color="primary">{industry}</Badge></H6>
     )
   })
 
@@ -143,70 +152,53 @@ const ProfileView: FunctionComponent<{ profile: Profile }> = (props) => {
           {profile.description}
         </Col>
         <Col xs={{ size: 2 }}>
-        {t('profile.linkedin')}
+          {t('profile.linkedin')}
         </Col>
         <Col xs={{ size: 10 }}>
           {profile.linkedin}
         </Col>
 
         <Col xs={{ size: 2 }}>
-        {t('profile.industry')}
+          {t('profile.industry')}
+        </Col>
+        <Col xs={{ size: 10 }}>
+          {industries}
+        </Col>
+        <Col xs={{ size: 2 }}>
+          {t('profile.skills')}
         </Col>
         <Col xs={{ size: 10 }}>
           {skills}
-        </Col>
-        <Col xs={{ size: 2 }}>
-        {t('profile.skills')}
-        </Col>
-        <Col xs={{ size: 10 }}>
-          {competences}
         </Col>
       </Row>
     </div >
   )
 }
 
-const loremIpsum = `
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-`
-
 const ProfilesComponent: FunctionComponent = (props) => {
   const { t } = useTranslation('translations', { i18n });
-  const [randomUsers, setRandomUsers] = useState([]);
   const [currentProfile, setCurrentProfile] = useState<any>();
+  const { user } = useAuth0() as any;
   //const dispatch = useDispatch()
-  const profileData = useSelector((state: ReduxState) => state)
+  const [users, setUsers] = useState<ReadonlyArray<Profile>>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(
-        'https://randomuser.me/api/?results=20',
-      );
+    (async () => {
+      const data = await api.getAllUsers() as any
+      setUsers(data)
+    })()
+  }, [user.email]);
 
-      const users: any = result.data.results.map((p: any): any => ({
-        alias: `${p.name.first} ${p.name.last}`,
-        description: loremIpsum,
-        linkedin: 'https://www.linkedin.com/in/peterbartels',
-        skills: [],
-        competences: [],
-        email: p.email,
-        picture: p.picture.medium
-      }))
-      setRandomUsers((profileData as any).profiles.concat(users));
-    };
-    fetchData();
-  }, [profileData]);
+  //TODO move this to a profileDetailView const profileData = useSelector((state: ReduxState) => state)
 
   const handleClick = (profile: Profile) => (e: any) => {
     setCurrentProfile(profile)
   }
 
-  /*
+  /* TODO: move to profileview after select profile
      const handleSubmit = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
      evt.preventDefault();
-     dispatch({ type: "EDIT_PROFILE", payload: profile })
-
-     
+     dispatch({ type: "PROFILE_VIEW", payload: profile })
      }
    */
   return currentProfile ? <ProfileView profile={currentProfile} /> : (
@@ -225,40 +217,11 @@ const ProfilesComponent: FunctionComponent = (props) => {
       </Row>
 
       <Row>
-        <Query
-          query={gql`
-            {
-              allProfiles {
-                alias
-                email
-                linkedin
-                description
-                skills
-                categories
-              }
-            }
-          `}
-        >
-          {(profile: any) => {
-            return !profile.data ? null : (
-              <>
-                {profile.data.allProfiles.map((p: any, index: number) => (
-                  <Col sm={{ size: 3 }} key={index} ><ProfilesOverview profile={p} handleClick={handleClick} /></Col>
-                ))}
-              </>
-            )
-          }}
-        </Query>
-
-        {randomUsers.map((profile: Profile, index: number) => {
-          const randomSkill = Math.floor((Math.random() * 3) % 3)
-          profile.skills = profile.skills.length === 0 ? [skills[randomSkill]] : profile.skills
-          const randomCompetence = Math.floor((Math.random() * industries.length) % industries.length)
-
-          profile.competences = profile.competences.length === 0 ? [industries[randomCompetence]] : profile.competences
-
-          return (<Col sm={{ size: 3 }} key={index}><ProfilesOverview profile={profile} handleClick={handleClick} /></Col>)
-        })}
+        {
+          users.map((profile: Profile, index: number) => {
+            return (<Col sm={{ size: 3 }} key={index}><ProfilesOverview profile={profile} handleClick={handleClick} /></Col>)
+          })
+        }
       </Row>
     </>
   )
