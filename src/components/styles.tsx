@@ -110,21 +110,34 @@ export const Content = styled(Centered)`
 
 export const FooterContainer = styled(MainContainer)`
   background: #414756;
+  margin-top: 1em;
 `
 
 export const Footer = styled(Centered)`
   color:white;
-  height: 150px;
   padding: 40px;
   font-family: 'Sen';
   box-shadow:0px 9px 7px -5px #fff;
   display: flex;
-  flex-direction: row;
-  span {                                                                                                                                                                                                                                                                      
-    padding: 0 3em 0 3em;
-    border-right: 2px solid #fff;
-    &:last-child {
-      border-right: 0px;
+  @media(min-width: 768px) {
+    flex-direction: row;
+    span {
+      padding: 0 3em 0 3em;
+      border-right: 2px solid #fff;
+      &:last-child {
+        border-right: 0px;
+      }
+    }
+  }
+  @media(max-width: 768px){
+    flex-direction: column;
+    span {
+      width: 100%;
+      padding: 1em;
+      border-bottom: 2px solid #fff;
+      &:last-child {
+        border-bottom: 0px;
+      }
     }
   }
 `
