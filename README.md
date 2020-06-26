@@ -1,4 +1,4 @@
-## Hackathon (3 days) for Dutch Hacking Health so that people can share their knowledge and profile so that they can contribute in helping fight COVID-19
+## Code for NL Hackers Hub, Join us and share the projecs you're working on for the government
 
 # Instructions
 
