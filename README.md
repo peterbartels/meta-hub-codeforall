@@ -1,4 +1,4 @@
-## Code for NL Hackers Hub, Join us and share the projecs you're working on for the government
+## Code for ALL Hackers Hub, Join us and share the projecs you're working on for the government
 
 # Instructions
 
